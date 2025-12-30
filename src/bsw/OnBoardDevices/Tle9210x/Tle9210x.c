@@ -15,7 +15,7 @@
 ******************************************************************************************************************/
 /* Include Headerfiles  */
 #include "Tle9210x.h"
-#include "PFM.h"
+#include "Pfm.h"
 #include "Spi.h"
 #include "LiBool.h"
 #include "Pwm.h"

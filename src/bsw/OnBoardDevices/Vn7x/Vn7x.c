@@ -19,7 +19,7 @@
 #include "Vn7x_HwCfg.h"
 
 #include "AdcIf.h"
-#include "PFM.h"
+#include "Pfm.h"
 #include <string.h>
 #include "LiBool.h"
 /* PRQA S 0314 EOF*/
@@ -62,7 +62,7 @@ static void Vn7x_WriteOutput(void);
  purpose: The diagnostic handler for VN7X module. Invoked every 10ms.
           Figure out if openload, short to battery or short to ground
           fault has occured. Always report current fault status to 
-          PFM module. Debounce is performed in PFM module.
+          Pfm module. Debounce is performed in Pfm module.
  ****************************************************************/
 static void Vn7x_DiagHandle(void)
 {
@@ -74,10 +74,10 @@ static void Vn7x_DiagHandle(void)
     PFM_PhysicalId_e l_eFid; 
     
     /* Go through all channels and perform diagnostic operation.
-       Report diagnosing result to PFM. */
+       Report diagnosing result to Pfm. */
     for( l_u8Port = 0u; l_u8Port < (uint8)VN7X_ID_MAX; l_u8Port++ )
     {
-        /* Get the index of current channel in PFM module*/
+        /* Get the index of current channel in Pfm module*/
         l_bChanState = (boolean)(VN7X_GETCHANSTATE(l_u8Port) ? TRUE : FALSE);
         /* if diagnosing channel selection equals this channel (channel 0 or channel 1),
            which means the ADC sample value belongs to this channel, diagnosing can be 

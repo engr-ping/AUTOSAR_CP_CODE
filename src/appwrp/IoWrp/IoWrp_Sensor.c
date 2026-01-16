@@ -61,25 +61,25 @@ SensorAdc SensorAdcInstance[] = {
   { .SensorType = U8, .ReadAdcValue = NULL, .SensorUnion.Write8BitValue = WriterAary[0] }
 };
 
-Std_ReturnType Sensor_AdcWriteValue(const SensorAdc *SensorAdcPrt, void *Value)
+Std_ReturnType Sensor_AdcWriteValue(const SensorAdc *sensorAdcPrt, void *Value)
 {
   Std_ReturnType Ret = E_NOT_OK;
-  switch (SensorAdcPrt->SensorType)
+  switch (sensorAdcPrt->SensorType)
   {
     case BOOLEAN:
-      Ret = SensorAdcPrt->SensorUnion.WriteBooleanValue(*(boolean *) Value);
+      Ret = sensorAdcPrt->SensorUnion.WriteBooleanValue(*(boolean *) Value);
       break;
     case U8:
-      Ret = SensorAdcPrt->SensorUnion.Write8BitValue(*(uint8 *) Value);
+      Ret = sensorAdcPrt->SensorUnion.Write8BitValue(*(uint8 *) Value);
       break;
     case U16:
-      Ret = SensorAdcPrt->SensorUnion.Write16BitValue(*(uint16 *) Value);
+      Ret = sensorAdcPrt->SensorUnion.Write16BitValue(*(uint16 *) Value);
       break;
     case U32:
-      Ret = SensorAdcPrt->SensorUnion.Write32BitValue(*(uint32 *) Value);
+      Ret = sensorAdcPrt->SensorUnion.Write32BitValue(*(uint32 *) Value);
       break;
     case PRT:
-      Ret = SensorAdcPrt->SensorUnion.WritePointerValue(Value);
+      Ret = sensorAdcPrt->SensorUnion.WritePointerValue(Value);
       break;
     default:
       Ret = E_NOT_OK;
@@ -89,19 +89,19 @@ Std_ReturnType Sensor_AdcWriteValue(const SensorAdc *SensorAdcPrt, void *Value)
   return Ret;
 }
 
-void Sensor_AdcTransfor(const SensorAdc *SensorAdcPrt)
+void Sensor_AdcTransfor(const SensorAdc *sensorAdcPrt)
 {
   uint16 SensorAdc;
-  Std_ReturnType Ret = SensorAdcPrt->ReadAdcValue((uint16 *) &SensorAdc);
+  Std_ReturnType Ret = sensorAdcPrt->ReadAdcValue((uint16 *) &SensorAdc);
   // Initialization code for sensors can be added here
-  uint8 condition = SensorAdcPrt->RangeLenth;
+  uint8 condition = sensorAdcPrt->RangeLenth;
   uint8 index = 0;
   while (index < condition)
   {
-    if (SensorAdc < SensorAdcPrt->AdcRanges[index].AdcValue)
+    if (SensorAdc < sensorAdcPrt->AdcRanges[index].AdcValue)
     {
       // Some operation based on the range
-      Ret |= Sensor_AdcWriteValue(SensorAdcPrt, &SensorAdcPrt->AdcRanges[index].Range);
+      Ret |= Sensor_AdcWriteValue(sensorAdcPrt, &sensorAdcPrt->AdcRanges[index].Range);
       break;
     }
     index++;
@@ -132,7 +132,7 @@ void Sensor_DiTransfor(const SensorDi *SensorDiPrt)
 void Sensor_Mainfunction(void)
 {
   // Initialization code for sensors can be added here
-  SensorAdc *SensorAdcPrt = SensorAdcInstance;
+  SensorAdc *sensorAdcPrt = SensorAdcInstance;
   for (uint8 SensorId = 0; SensorId < sizeof(SensorAdcInstance) / sizeof(SensorAdc); SensorId++)
   {
     Sensor_AdcTransfor(&SensorAdcInstance[SensorId]);

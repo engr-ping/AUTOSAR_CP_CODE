@@ -15,53 +15,20 @@
 ******************************************************************************************************************/
 
 /* Include Headerfiles  */
+
 #ifndef _PFM_CFG_H
 #define _PFM_CFG_H
-
-#include "Platform_Types.h"
-
+#include "Pfm_Types.h"
 
 /***********************    Global Type Definition    ************************/
-typedef enum
-{
-    PFM_DDS_ING,
-    PFM_DDS_POS,
-    PFM_DDS_NEG,
-    PFM_DDS_SET,
-    PFM_DDS_CLR,
 
-    PFM_DDS_SIZE
-} PFM_DefectDetectState_e;
+/* Abbreviations used throughout this module:
+   DDS: Defect Detect State (ING: In-progress, POS: Positive, NEG: Negative, SET: Set, CLR: Clear)
+   DDT: Defect Detect Type (VCC: Short to VCC, GND: Short to GND, OL: Open Load)
+   DFC: Defect Filter Count (SET: Set counter, CLR: Clear counter)
+   DRS: Defect Report State, PID: Physical ID, FID: Function ID (alias for PID)
+*/
 
-typedef enum
-{
-    PFM_DDT_VCC,
-    PFM_DDT_GND,
-    PFM_DDT_OL,
-
-    PFM_DDT_SIZE
-} PFM_DefectDetectType_e;
-
-typedef enum
-{
-    PFM_DFC_SET,
-    PFM_DFC_CLR,
-
-    PFM_DFC_SIZE
-} PFM_DefectFilterCount_e;
-
-typedef struct
-{
-    PFM_DefectDetectState_e eShort2Vcc;
-    PFM_DefectDetectState_e eShort2Gnd;
-    PFM_DefectDetectState_e eOpenLoad;
-} PFM_DefectReportState_t;
-
-typedef struct
-{
-    PFM_DefectReportState_t tDRS;
-    boolean bInterceptEnable;
-} PFM_FaultState_t;
 
 /***********************    Global Type Definition    ************************/
 
@@ -69,6 +36,7 @@ typedef struct
 typedef enum
 {
     PFM_PID_DUMMTY,
+
     PFM_PID_SIZE
 } PFM_PhysicalId_e;
 
@@ -77,28 +45,33 @@ typedef enum
 enum
 {
     /* Index    UdsDtc */
-    /*     0 */ DtcClass_DTC_DUMMY = 0,    
+    /*     0 */ DtcClass_DTC_DUMMY = 0,
+
     DTC_MAX
 };
 
 
-#define PFM_DEM_ERROR_ENABLE_FLG    1   //gDEM_bDiagErrorEnableFlg
+#define PFM_DEM_ERROR_ENABLE_FLG    1U   //gDEM_bDiagErrorEnableFlg
 
 
 /**************************  Macro Definitions    **************************/
 
-#define PFM_FID_OPHxx    (PFM_PID_DUMMTY)    // S3003   OPHxx
+/* Abbreviations used in macro names:
+   FID: Function ID mapping (aliases for PID), 
+   PID: Physical ID, DDT: Defect Detect Type, DFC: Defect Filter Count
+*/
 
-#define PFM_FID_OR01    (PFM_PID_DUMMTY)
+#define PFM_FID_OPHXX    (PFM_PID_DUMMTY)    
 
+#define PFM_FID_SLC_PWM    (PFM_PID_DUMMTY)
 #define PFM_FID_VREF01    (PFM_PID_DUMMTY)
 #define PFM_FID_VREF02    (PFM_PID_DUMMTY)
 #define PFM_FID_VREF03    (PFM_PID_DUMMTY)
 
-extern const uint8  cPFM_au8DefectFilterTime[PFM_PID_SIZE][PFM_DDT_SIZE][PFM_DFC_SIZE];
-extern const uint16  cPFM_au16DefectDtcId[PFM_PID_SIZE][PFM_DDT_SIZE];
-extern const uint8  cPFM_au8InterceptEnableMask[PFM_PID_SIZE];
-extern const boolean  cPFM_abInterceptState[PFM_PID_SIZE];
+extern const uint8 Pfm_DefectFilterTime[PFM_PID_SIZE][PFM_DDT_SIZE][PFM_DFC_SIZE];
+extern const uint16 Pfm_DefectDtcId[PFM_PID_SIZE][PFM_DDT_SIZE];
+extern const uint8 Pfm_InterceptEnableMask[PFM_PID_SIZE];
+extern const boolean Pfm_InterceptState[PFM_PID_SIZE];
 
 #endif // _PFM_CFG_H
 

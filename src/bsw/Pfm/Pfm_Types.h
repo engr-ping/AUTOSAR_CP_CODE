@@ -16,34 +16,52 @@
 
 /* Include Headerfiles  */
 
-#ifndef _PFM_H
-#define _PFM_H
-#include "Pfm_Types.h"
-#include "Pfm_Cfg.h"
+#ifndef _PFM_TYPES_H
+#define _PFM_TYPES_H
 
-/* Module: Pfm - Power/Fault Management
-   Abbreviations used:
-   PID: Physical ID - identifies the physical fault detection device
-   DDT: Defect Detect Type - type of defect (short to Vcc, short to Gnd, open load)
-   DFC: Defect Filter Count - counter for fault filtering
-   DDS: Defect Detect State - current state of defect detection
-*/
+#include "Platform_Types.h"
 
-extern boolean Pfm_InterceptEnable[PFM_PID_SIZE];
+typedef enum
+{
+    PFM_DDS_ING,
+    PFM_DDS_POS,
+    PFM_DDS_NEG,
+    PFM_DDS_SET,
+    PFM_DDS_CLR,
 
-extern void Pfm_Init(void);
-extern void Pfm_10ms(void);
-extern void Pfm_EnableDiagnostic(uint8 Id, boolean Enable);
+    PFM_DDS_SIZE
+} PFM_DefectDetectState_e;
 
-extern void Pfm_DefectReport(  PFM_PhysicalId_e Pid, 
-                              PFM_DefectDetectState_e OpenLoad, 
-                              PFM_DefectDetectState_e Short2Vcc, 
-                              PFM_DefectDetectState_e Short2Gnd );
+typedef enum
+{
+    PFM_DDT_VCC,
+    PFM_DDT_GND,
+    PFM_DDT_OL,
 
-extern void Pfm_ClearFault(uint8 Id);
-extern void Pfm_ClearFaultAll(void);
-extern boolean Pfm_GetFaultState( PFM_PhysicalId_e Pid, uint8 Ddt);
+    PFM_DDT_SIZE
+} PFM_DefectDetectType_e;
 
-#endif
+typedef enum
+{
+    PFM_DFC_SET,
+    PFM_DFC_CLR,
+
+    PFM_DFC_SIZE
+} PFM_DefectFilterCount_e;
+
+typedef struct
+{
+    PFM_DefectDetectState_e Short2Vcc;
+    PFM_DefectDetectState_e Short2Gnd;
+    PFM_DefectDetectState_e OpenLoad;
+} PFM_DefectReportState_t;
+
+typedef struct
+{
+    PFM_DefectReportState_t DefectReportState;
+    boolean InterceptEnable;
+} PFM_FaultState_t;
 
 
+
+#endif /**< _PFM_TYPES_H */

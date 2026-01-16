@@ -16,38 +16,45 @@
 
 /* Include Headerfiles  */
 /* ===================                                                  */
-#include "ind_startup.h"
-#include "Platform_Types.h"
 #include "Pfm.h"
 #include "Pfm_Cfg.h"
 #include "dem.h"
 
+/* Module: Pfm - Power/Fault Management
+   Abbreviations used:
+   PID: Physical ID - identifies the physical fault detection device
+   DDT: Defect Detect Type - type of defect (VCC, GND, OL)
+   DFC: Defect Filter Count - counter for fault filtering
+   DDS: Defect Detect State - current state of defect detection
+   DEM: Diagnostic Event Manager
+*/
+
 /* Macros Local To This Module                                          */
 /* ===========================                                          */
-#define b_MASK                      (uint8)0xFFu
+#define PFM_BIT_MASK_ALL            (uint8)0xFFu
 
-#define SETBIT_U8(basis,bitpos)     ((basis) |= ((uint8)1 << (bitpos)))
-#define CLRBIT_U8(basis,bitpos)     ((basis) &= (uint8)b_MASK - ((uint8)1 << (bitpos)))
-#define GETBIT_U8(basis,bitpos)     (((basis) & ((uint8)1 << (bitpos))) != 0u)
+#define PFM_SETBIT(basis, bitpos)   ((basis) |= ((uint8)1u << (bitpos)))
+#define PFM_CLRBIT(basis, bitpos)   ((basis) &= (uint8)PFM_BIT_MASK_ALL - ((uint8)1u << (bitpos)))
+#define PFM_GETBIT(basis, bitpos)   (((basis) & ((uint8)1u << (bitpos))) != 0u)
 
 
 /* Local Module RAM-Definitions (attribute static)                      */
 /* Definition of variables only local to this module. That is, not to   */
 /* be exported to other modules.                                        */
 /* ===========================================                          */
-static boolean sPfm_abFaultUpdateEnable[PFM_PID_SIZE];
-static boolean sPFM_bFaultUpdateEnableGlobal;
-static uint8 sPFM_au8DefectFilterCount[PFM_PID_SIZE][PFM_DDT_SIZE][PFM_DFC_SIZE];
-static uint8 sPFM_au8FaultState[PFM_PID_SIZE];
-static PFM_DefectDetectState_e sPFM_aeDefectDetectState[PFM_PID_SIZE][PFM_DDT_SIZE];
+static boolean Pfm_FaultUpdateEnable[PFM_PID_SIZE];
+static boolean Pfm_FaultUpdateEnableGlobal;
+static uint8 Pfm_DefectFilterCount[PFM_PID_SIZE][PFM_DDT_SIZE][PFM_DFC_SIZE];
+static uint8 Pfm_FaultState[PFM_PID_SIZE];
+static PFM_DefectDetectState_e Pfm_DefectDetectState[PFM_PID_SIZE][PFM_DDT_SIZE];
 
 /* Exported Variables Definitions */
 /* ============================================================         */
-boolean gPFM_abInterceptEnable[PFM_PID_SIZE];
+boolean Pfm_InterceptEnable[PFM_PID_SIZE];
 /*****************    Local Functions Declaration    ******************/
 
-static void PFM_u8ReportError2DEM(const uint16 u16DTC_ID);
-static void PFM_u8ClearError2DEM(const uint16 u16DTC_ID);
+static void Pfm_ReportError2DEM(const uint16 dtcId);
+static void Pfm_ClearError2DEM(const uint16 dtcId);
 /************************************************************************/
 /*                 Global Definitions                                   */
 /************************************************************************/
@@ -57,82 +64,82 @@ void Pfm_Init(void)
 
     for( i = 1u; i < (uint8)PFM_PID_SIZE; i++ )
     {
-        gPFM_abInterceptEnable[i]   = FALSE;
-        sPFM_abFaultUpdateEnable[i] = TRUE;
+        Pfm_InterceptEnable[i]   = FALSE;
+        Pfm_FaultUpdateEnable[i] = TRUE;
     }
 
-    sPFM_bFaultUpdateEnableGlobal   = TRUE;
+    Pfm_FaultUpdateEnableGlobal = TRUE;
 }
 
 /****************************************************************
- process: PFM_v10ms
- purpose: 
+ process: Pfm_10ms
+ purpose: 10ms periodic fault detection and filtering handler
  ****************************************************************/
-void PFM_v10ms(void)
+void Pfm_10ms(void)
 {
-    uint8 iPid;
-    uint8 jDdt;
-    uint8* pu8Tmp;
+    uint8 pid;  /* Physical ID - local variable */
+    uint8 ddt;  /* Defect Detect Type - local variable */
+    uint8* filterCountPtr;
 
-    if( sPFM_bFaultUpdateEnableGlobal != (boolean)FALSE )
+    if( Pfm_FaultUpdateEnableGlobal != (boolean)FALSE )
     {
-        for( iPid = 1u; iPid < (uint8)PFM_PID_SIZE; iPid++ )
+        for( pid = 1u; pid < (uint8)PFM_PID_SIZE; pid++ )
         {
-            if( sPFM_abFaultUpdateEnable[iPid] != (boolean)FALSE )
+            if( Pfm_FaultUpdateEnable[pid] != (boolean)FALSE )
             {
-                for( jDdt = 0u; jDdt < (uint8)PFM_DDT_SIZE; jDdt++ )
+                for( ddt = 0u; ddt < (uint8)PFM_DDT_SIZE; ddt++ )
                 {
-                    switch(sPFM_aeDefectDetectState[iPid][jDdt])
+                    switch(Pfm_DefectDetectState[pid][ddt])
                     {
                         case PFM_DDS_POS:
                         {
-                            pu8Tmp = &sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_SET];
-                            if( (*pu8Tmp) < cPFM_au8DefectFilterTime[iPid][jDdt][PFM_DFC_SET] )
+                            filterCountPtr = &Pfm_DefectFilterCount[pid][ddt][PFM_DFC_SET];
+                            if( (*filterCountPtr) < Pfm_DefectFilterTime[pid][ddt][PFM_DFC_SET] )
                             {
-                                (*pu8Tmp) = (*pu8Tmp) + 1u;
+                                (*filterCountPtr) = (*filterCountPtr) + 1u;
                             }
                             else
                             {
-                                sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_SET] = 0u;
-                                sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_CLR] = 0u;
-                                SETBIT_U8(sPFM_au8FaultState[iPid], jDdt);
-                                PFM_u8ReportError2DEM(cPFM_au16DefectDtcId[iPid][jDdt]);
+                                Pfm_DefectFilterCount[pid][ddt][PFM_DFC_SET] = 0u;
+                                Pfm_DefectFilterCount[pid][ddt][PFM_DFC_CLR] = 0u;
+                                PFM_SETBIT(Pfm_FaultState[pid], ddt);
+                                Pfm_ReportError2DEM(Pfm_DefectDtcId[pid][ddt]);
                             }
                         }
                         break;
 
                         case PFM_DDS_NEG:
                         {
-                            pu8Tmp = &sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_CLR];
-                            if( (*pu8Tmp) < cPFM_au8DefectFilterTime[iPid][jDdt][PFM_DFC_CLR] )
+                            filterCountPtr = &Pfm_DefectFilterCount[pid][ddt][PFM_DFC_CLR];
+                            if( (*filterCountPtr) < Pfm_DefectFilterTime[pid][ddt][PFM_DFC_CLR] )
                             {
-                                (*pu8Tmp) = (*pu8Tmp) + 1u;
+                                (*filterCountPtr) = (*filterCountPtr) + 1u;
                             }
                             else
                             {
-                                sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_SET] = 0u;
-                                sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_CLR] = 0u;
-                                CLRBIT_U8(sPFM_au8FaultState[iPid], jDdt);
-                                PFM_u8ClearError2DEM(cPFM_au16DefectDtcId[iPid][jDdt]);
+                                Pfm_DefectFilterCount[pid][ddt][PFM_DFC_SET] = 0u;
+                                Pfm_DefectFilterCount[pid][ddt][PFM_DFC_CLR] = 0u;
+                                PFM_CLRBIT(Pfm_FaultState[pid], ddt);
+                                Pfm_ClearError2DEM(Pfm_DefectDtcId[pid][ddt]);
                             }
                         }
                         break;
 
                         case PFM_DDS_SET:
                         {
-                            sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_SET] = 0u;
-                            sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_CLR] = 0u;
-                            (void)SETBIT_U8(sPFM_au8FaultState[iPid], jDdt);
-                            PFM_u8ReportError2DEM(cPFM_au16DefectDtcId[iPid][jDdt]);
+                            Pfm_DefectFilterCount[pid][ddt][PFM_DFC_SET] = 0u;
+                            Pfm_DefectFilterCount[pid][ddt][PFM_DFC_CLR] = 0u;
+                            (void)PFM_SETBIT(Pfm_FaultState[pid], ddt);
+                            Pfm_ReportError2DEM(Pfm_DefectDtcId[pid][ddt]);
                         }
                         break;
 
                         case PFM_DDS_CLR:
                         {
-                            sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_SET] = 0u;
-                            sPFM_au8DefectFilterCount[iPid][jDdt][PFM_DFC_CLR] = 0u;
-                            CLRBIT_U8(sPFM_au8FaultState[iPid], jDdt);
-                            PFM_u8ClearError2DEM(cPFM_au16DefectDtcId[iPid][jDdt]);
+                            Pfm_DefectFilterCount[pid][ddt][PFM_DFC_SET] = 0u;
+                            Pfm_DefectFilterCount[pid][ddt][PFM_DFC_CLR] = 0u;
+                            PFM_CLRBIT(Pfm_FaultState[pid], ddt);
+                            Pfm_ClearError2DEM(Pfm_DefectDtcId[pid][ddt]);
                         }
                         break;
 
@@ -144,9 +151,9 @@ void PFM_v10ms(void)
                     }
                  }
                 
-                if ((sPFM_au8FaultState[iPid] & cPFM_au8InterceptEnableMask[iPid]) != 0u)
+                if ((Pfm_FaultState[pid] & Pfm_InterceptEnableMask[pid]) != 0u)
                 {
-                    gPFM_abInterceptEnable[iPid] = TRUE;
+                    Pfm_InterceptEnable[pid] = TRUE;
                 }
                 else
                 {
@@ -165,118 +172,118 @@ void PFM_v10ms(void)
     }
 }
 /****************************************************************
- process: PFM_vEnableDiagnosic
- purpose: 
+ process: Pfm_EnableDiagnostic
+ purpose: Enable/Disable diagnostic for a specific fault device
  ****************************************************************/
-void PFM_vEnableDiagnosic(uint8 u8Id, boolean bEnable)
+void Pfm_EnableDiagnostic(uint8 Id, boolean Enable)
 {
-    if(u8Id < (uint8)PFM_PID_SIZE)
+    if(Id < (uint8)PFM_PID_SIZE)
     {
-        sPFM_abFaultUpdateEnable[u8Id] = bEnable;
+        Pfm_FaultUpdateEnable[Id] = Enable;
     }
 }
 
 /****************************************************************
- process: PFM_vClearFault
- purpose: 
+ process: Pfm_ClearFault
+ purpose: Clear fault state for a specific device
  ****************************************************************/
-void PFM_vClearFault(uint8 u8Id)
+void Pfm_ClearFault(uint8 Id)
 {
-    uint8 jDdt; 
-    for( jDdt = 0u; jDdt < (uint8)PFM_DDT_SIZE; jDdt++ )
+    uint8 ddt;  /* Defect Detect Type - local variable */
+    for( ddt = 0u; ddt < (uint8)PFM_DDT_SIZE; ddt++ )
     {
-        sPFM_au8DefectFilterCount[u8Id][jDdt][PFM_DFC_SET] = 0u;
-        sPFM_au8DefectFilterCount[u8Id][jDdt][PFM_DFC_CLR] = 0u;
+        Pfm_DefectFilterCount[Id][ddt][PFM_DFC_SET] = 0u;
+        Pfm_DefectFilterCount[Id][ddt][PFM_DFC_CLR] = 0u;
     }
-    gPFM_abInterceptEnable[u8Id] = FALSE;
-    sPFM_au8FaultState[u8Id] = 0u;
+    Pfm_InterceptEnable[Id] = FALSE;
+    Pfm_FaultState[Id] = 0u;
 }
 
 /****************************************************************
- process: PFM_vClearFaultAll
- purpose: 
+ process: Pfm_ClearFaultAll
+ purpose: Clear fault state for all devices
  ****************************************************************/
-void PFM_vClearFaultAll(void)
+void Pfm_ClearFaultAll(void)
 {
-    uint8 iPid;
-    (void)memset((void *)sPFM_au8DefectFilterCount, 0, (uint16)PFM_PID_SIZE*(uint16)PFM_DDT_SIZE*(uint16)PFM_DFC_SIZE);   /* PRQA S 0314*/
+    uint8 pid;  /* Physical ID */
+    (void)memset((void *)Pfm_DefectFilterCount, 0, (uint16)PFM_PID_SIZE*(uint16)PFM_DDT_SIZE*(uint16)PFM_DFC_SIZE);   /* PRQA S 0314*/
     
-    for (iPid = 0; iPid < (uint8)PFM_PID_SIZE; iPid++)
+    for (pid = 0; pid < (uint8)PFM_PID_SIZE; pid++)
     {
-        gPFM_abInterceptEnable[iPid] = FALSE;
-        sPFM_au8FaultState[iPid] = 0u;
-        sPFM_aeDefectDetectState[iPid][PFM_DDT_VCC] = PFM_DDS_CLR;
-        sPFM_aeDefectDetectState[iPid][PFM_DDT_GND] = PFM_DDS_CLR;
-        sPFM_aeDefectDetectState[iPid][PFM_DDT_OL]  = PFM_DDS_CLR;
+        Pfm_InterceptEnable[pid] = FALSE;
+        Pfm_FaultState[pid] = 0u;
+        Pfm_DefectDetectState[pid][PFM_DDT_VCC] = PFM_DDS_CLR;
+        Pfm_DefectDetectState[pid][PFM_DDT_GND] = PFM_DDS_CLR;
+        Pfm_DefectDetectState[pid][PFM_DDT_OL]  = PFM_DDS_CLR;
     }
 }
 
 /****************************************************************
- process: PFM_vDefectReport
- purpose: 
+ process: Pfm_DefectReport
+ purpose: Report defect state change from diagnostic driver
  ****************************************************************/
-void PFM_vDefectReport( PFM_PhysicalId_e        ePid, 
-                        PFM_DefectDetectState_e eOpenLoad, 
-                        PFM_DefectDetectState_e eShort2Vcc, 
-                        PFM_DefectDetectState_e eShort2Gnd )
+void Pfm_DefectReport( PFM_PhysicalId_e Pid, 
+                       PFM_DefectDetectState_e OpenLoad, 
+                       PFM_DefectDetectState_e Short2Vcc, 
+                       PFM_DefectDetectState_e Short2Gnd )
 {
-    if( ePid < PFM_PID_SIZE )
+    if( Pid < PFM_PID_SIZE )
     {
-        sPFM_aeDefectDetectState[ePid][PFM_DDT_VCC] = eShort2Vcc;
-        sPFM_aeDefectDetectState[ePid][PFM_DDT_GND] = eShort2Gnd;
-        sPFM_aeDefectDetectState[ePid][PFM_DDT_OL]  = eOpenLoad;
+        Pfm_DefectDetectState[Pid][PFM_DDT_VCC] = Short2Vcc;
+        Pfm_DefectDetectState[Pid][PFM_DDT_GND] = Short2Gnd;
+        Pfm_DefectDetectState[Pid][PFM_DDT_OL]  = OpenLoad;
     }
 }
 
 /****************************************************************
- process: PFM_bGetFaultState
+ process: Pfm_GetFaultState
  purpose: Acquire the channel fault state 
  ****************************************************************/
-boolean PFM_bGetFaultState( PFM_PhysicalId_e ePid,  uint8 u8Ddt)
+boolean Pfm_GetFaultState( PFM_PhysicalId_e Pid, uint8 Ddt)
 {
-    boolean bRet;
-    if((ePid < PFM_PID_SIZE) && (u8Ddt < (uint8)PFM_DDT_SIZE))
+    boolean retval;
+    if((Pid < PFM_PID_SIZE) && (Ddt < (uint8)PFM_DDT_SIZE))
     {
-        if(GETBIT_U8(sPFM_au8FaultState[ePid], u8Ddt))
+        if(PFM_GETBIT(Pfm_FaultState[Pid], Ddt))
         {
-            bRet = TRUE;
+            retval = TRUE;
         }
         else
         {
-            bRet = FALSE;
+            retval = FALSE;
         }
     }
     else
     {
-        bRet = FALSE;
+        retval = FALSE;
     }
-    return bRet;
+    return retval;
 }
 
-static void PFM_u8ReportError2DEM(const uint16 u16DTC_ID)
+static void Pfm_ReportError2DEM(const uint16 dtcId)
 {
 #if (PFM_DEM_ERROR_ENABLE_FLG == TRUE)
-    if(u16DTC_ID >= (uint16)DTC_MAX)
+    if(dtcId >= (uint16)DTC_MAX)
     {
         /* nothing to do */
     }
     else
     {
-        (void)Dem_SetEventStatus(u16DTC_ID, DEM_EVENT_STATUS_FAILED); 
+        (void)Dem_SetEventStatus(dtcId, DEM_EVENT_STATUS_FAILED); 
     }
 #endif
 }
 
-static void PFM_u8ClearError2DEM(const uint16 u16DTC_ID)
+static void Pfm_ClearError2DEM(const uint16 dtcId)
 {
 #if (PFM_DEM_ERROR_ENABLE_FLG == TRUE)
-    if(u16DTC_ID >= (uint16)DTC_MAX)
+    if(dtcId >= (uint16)DTC_MAX)
     {
         /* nothing to do */
     }
     else
     {
-        (void)Dem_SetEventStatus(u16DTC_ID, DEM_EVENT_STATUS_PASSED); 
+        (void)Dem_SetEventStatus(dtcId, DEM_EVENT_STATUS_PASSED); 
     }
 #endif
 }

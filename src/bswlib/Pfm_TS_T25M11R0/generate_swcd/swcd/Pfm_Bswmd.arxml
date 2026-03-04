@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 autosar_4-0-3_strict_compact.xsd">
+<AR-PACKAGES>
+    <AR-PACKAGE>
+        <SHORT-NAME>BswModule_Pfm</SHORT-NAME>
+        <ELEMENTS>
+            <BSW-MODULE-DESCRIPTION>
+                <SHORT-NAME>Pfm</SHORT-NAME>
+                <MODULE-ID>0xAB</MODULE-ID>
+                <PROVIDED-ENTRYS>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_Init</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_10ms</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_EnableDiagnostic</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_DefectReport</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_ClearFault</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_ClearFaultAll</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                        <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_GetFaultState</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                </PROVIDED-ENTRYS>
+                <INTERNAL-BEHAVIORS>
+                    <BSW-INTERNAL-BEHAVIOR>
+                        <SHORT-NAME>BswIbh_Pfm</SHORT-NAME>
+                        <EXCLUSIVE-AREAS>
+                            <EXCLUSIVE-AREA>
+                                <SHORT-NAME>Pfm_Exclusive_Area</SHORT-NAME>
+                            </EXCLUSIVE-AREA>
+                        </EXCLUSIVE-AREAS>
+                        <ENTITY-MRUV-TIMINGS/>
+                        <EVENT-CONTROLLED-TIMING-EVENTS>
+                            <EVENT-CONTROLLED-TIMING>
+                                <SHORT-NAME>Pfm_10ms_EventTiming</SHORT-NAME>
+                                <CONTROLLED-TIMING-EVENT-REF DEST="BSW-MODULE-ENTRY">/BswModule_Pfm/Pfm_10ms</CONTROLLED-TIMING-EVENT-REF>
+                            </EVENT-CONTROLLED-TIMING>
+                        </EVENT-CONTROLLED-TIMING-EVENTS>
+                    </BSW-INTERNAL-BEHAVIOR>
+                </INTERNAL-BEHAVIORS>
+            </BSW-MODULE-DESCRIPTION>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_Init</SHORT-NAME>
+                <CALLS>
+                    <BSW-MODULE-CALL-POINT>
+                        <CALL-TYPE>RETURNING</CALL-TYPE>
+                        <OPERATION-INVOKED-REF DEST="BSW-MODULE-ENTRY">/BswModule_Dem/Dem_Init</OPERATION-INVOKED-REF>
+                    </BSW-MODULE-CALL-POINT>
+                </CALLS>
+                <SERVICE-ID>0x01</SERVICE-ID>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_10ms</SHORT-NAME>
+                <CALLS>
+                    <BSW-MODULE-CALL-POINT>
+                        <CALL-TYPE>RETURNING</CALL-TYPE>
+                        <OPERATION-INVOKED-REF DEST="BSW-MODULE-ENTRY">/BswModule_Dem/Dem_SetEventStatus</OPERATION-INVOKED-REF>
+                    </BSW-MODULE-CALL-POINT>
+                </CALLS>
+                <SERVICE-ID>0x02</SERVICE-ID>
+                <TIMING-EVENT>
+                    <SHORT-NAME>Pfm_10ms_TimingEvent</SHORT-NAME>
+                    <EVENT-CONTROLLED-TIMING-EVENT>
+                        <EVENT-PERIOD>0.010</EVENT-PERIOD>
+                    </EVENT-CONTROLLED-TIMING-EVENT>
+                </TIMING-EVENT>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_EnableDiagnostic</SHORT-NAME>
+                <SERVICE-ID>0x03</SERVICE-ID>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_DefectReport</SHORT-NAME>
+                <SERVICE-ID>0x04</SERVICE-ID>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_ClearFault</SHORT-NAME>
+                <SERVICE-ID>0x05</SERVICE-ID>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_ClearFaultAll</SHORT-NAME>
+                <SERVICE-ID>0x06</SERVICE-ID>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY>
+                <SHORT-NAME>Pfm_GetFaultState</SHORT-NAME>
+                <SERVICE-ID>0x07</SERVICE-ID>
+            </BSW-MODULE-ENTRY>
+        </ELEMENTS>
+    </AR-PACKAGE>
+</AR-PACKAGES>
+</AUTOSAR>

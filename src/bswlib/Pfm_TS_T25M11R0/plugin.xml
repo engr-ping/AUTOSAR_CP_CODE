@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+  <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="%module.ext.id"
+             name="%module.ext.name">
+
+    <module id="%module.id"
+            label="%module.label"
+            mandatory="false"
+            allowMultiple="false"
+            description="%module.description"
+            copyright="(c) Continental Corporation"
+            
+            swVersionMajor="1"
+            swVersionMinor="0"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            
+            specVersionPrefix=""
+            specVersionMajor="1"
+            specVersionMinor="0"
+            specVersionPatch="0"
+            specVersionSuffix="0"
+
+            relVersionPrefix="AUTOSAR"
+            relVersionMajor="4"
+            relVersionMinor="0"
+            relVersionPatch="3"
+            
+            categoryType="%module.name"
+            categoryLayer="%module.category.layer"
+            categoryCategory="%module.category"
+            categoryComponent="%module.category.component">
+            
+            <cluster name="%module.cluster.name"/>
+    </module>
+  </extension>
+
+  <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="%module.configuration.ext.id"
+             name="%module.configuration.ext.name">
+    <configuration moduleId="%module.id">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="%module.configuration.xdm" type="xdm" id="%module.configuration.xdm.id"/>
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="%module.configuration.aspath"/>
+      </data>
+
+      <editor id="%module.editor.id"
+              label="%module.name">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="%module.configuration.aspath"/>
+          <parameter name="title" value="%module.name"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+  
+   <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="%module.generator.id"
+              name="%module.generator.name">
+    <generator 
+            id="%module.generator.int.id" 
+            moduleId="%module.id"
+            class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator">
+        <parameter name="templates" mode="generate,verify" value="generate"/>
+
+        <!-- swcd modes and template path parameters -->
+        <parameter name="mode_type"
+                 mode="generate_swcd" value="generate"/>
+
+        <parameter name="mode_type"
+                 mode="verify_swcd" value="verify"/>
+
+        <parameter name="templates"
+                 mode="generate_swcd,verify_swcd" value="generate_swcd"/>
+    </generator>
+  </extension>
+  
+   <extension point="org.eclipse.help.toc">
+      <toc file="anchors.xml" primary="true"/>
+   </extension>  
+</plugin>

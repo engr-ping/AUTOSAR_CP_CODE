@@ -1,0 +1,46 @@
+@PACKAGE_INIT@
+
+# Pfm Module - Power/Fault Management Configuration
+# This file provides CMake configuration for the Pfm module
+# 
+# Variables provided:
+#   Pfm_FOUND - Set to TRUE when this config is found
+#   Pfm_INCLUDE_DIRS - Include directories for Pfm headers
+#   Pfm_VERSION - Module version
+
+set(Pfm_FOUND TRUE)
+
+# Include directories
+set(Pfm_INCLUDE_DIRS "@PACKAGE_INCLUDE_DIR@")
+
+# Module version
+set(Pfm_VERSION "@Pfm_VERSION@")
+
+# Configuration variant
+set(Pfm_CONFIG_VARIANT "VariantPreCompile")
+
+# Available features
+set(Pfm_DEM_INTEGRATION TRUE)
+set(Pfm_FAULT_DETECTION TRUE)
+set(Pfm_FAULT_FILTERING TRUE)
+
+# Dependencies
+include(CMakeFindDependencyMacro)
+
+# Include targets if available
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/Pfm_Targets.cmake")
+  include("${CMAKE_CURRENT_LIST_DIR}/Pfm_Targets.cmake")
+endif()
+
+# Abbreviation definitions for documentation
+# PID: Physical ID - unique identifier for physical fault detection devices
+# DDT: Defect Detect Type - type of defect (short to VCC, short to GND, open load)
+# DFC: Defect Filter Count - counter for fault filtering (SET: set counter, CLR: clear counter)
+# DDS: Defect Detect State - current state of defect detection
+# DEM: Diagnostic Event Manager - module for diagnostic event management
+
+mark_as_advanced(
+  Pfm_FOUND
+  Pfm_INCLUDE_DIRS
+  Pfm_CONFIG_VARIANT
+)

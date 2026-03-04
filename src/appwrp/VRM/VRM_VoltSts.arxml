@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This file was saved with a tool from Vector Informatik GmbH-->
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00046.xsd" xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="EEB02CF9-3AE4-4E55-96F4-FFE617A03F24">
+      <SHORT-NAME>VRM_VoltSts_pkg</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="9CC7A962-6D76-4723-85F8-04E3334CE2CD">
+          <SHORT-NAME>VRM_VoltSts_imp</SHORT-NAME>
+          <ELEMENTS>
+            <SWC-IMPLEMENTATION UUID="6793e4e1-f44b-5845-73ba-4adf16ab30a5">
+              <SHORT-NAME>VRM_VoltSts</SHORT-NAME>
+              <CODE-DESCRIPTORS>
+                <CODE UUID="796197F3-F605-497C-B6DC-5FBA8F288F0C">
+                  <SHORT-NAME>Default</SHORT-NAME>
+                  <ARTIFACT-DESCRIPTORS>
+                    <AUTOSAR-ENGINEERING-OBJECT>
+                      <CATEGORY>SWSRC</CATEGORY>
+                    </AUTOSAR-ENGINEERING-OBJECT>
+                  </ARTIFACT-DESCRIPTORS>
+                </CODE>
+              </CODE-DESCRIPTORS>
+              <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/VRM_VoltSts</BEHAVIOR-REF>
+            </SWC-IMPLEMENTATION>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE UUID="D258F035-F183-4FB8-87CC-8EF4E34EACDE">
+          <SHORT-NAME>VRM_VoltSts_swc</SHORT-NAME>
+          <ELEMENTS>
+            <APPLICATION-SW-COMPONENT-TYPE UUID="562f7c56-097a-5dcf-02df-28de0f0e23cb">
+              <SHORT-NAME>VRM_VoltSts</SHORT-NAME>
+              <ADMIN-DATA>
+                <SDGS>
+                  <SDG GID="DV_SDG">
+                    <SD GID="DV_ReadOnly">1</SD>
+                  </SDG>
+                </SDGS>
+              </ADMIN-DATA>
+              <PORTS>
+                <P-PORT-PROTOTYPE UUID="8AE56812-F533-459B-9808-6CC5860D20BF">
+                  <SHORT-NAME>GetVoltStatus</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <PROVIDED-COM-SPECS>
+                    <SERVER-COM-SPEC>
+                      <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/GetVoltStatus/Operation</OPERATION-REF>
+                      <QUEUE-LENGTH>1</QUEUE-LENGTH>
+                    </SERVER-COM-SPEC>
+                  </PROVIDED-COM-SPECS>
+                  <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/GetVoltStatus</PROVIDED-INTERFACE-TREF>
+                </P-PORT-PROTOTYPE>
+                <R-PORT-PROTOTYPE UUID="f364a79a-1513-5bb8-3fa9-7b35402565a4">
+                  <SHORT-NAME>gVRM_u16VBatADValue</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <REQUIRED-COM-SPECS>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_if/gVRM_u16VBatADValue/Val</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>60</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                      <INIT-VALUE>
+                        <CONSTANT-REFERENCE>
+                          <CONSTANT-REF DEST="CONSTANT-SPECIFICATION">/VRM_VoltSts_pkg/VRM_VoltSts_dt/Ground/DefaultInitValue_UInt16</CONSTANT-REF>
+                        </CONSTANT-REFERENCE>
+                      </INIT-VALUE>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                  </REQUIRED-COM-SPECS>
+                  <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/VRM_VoltSts_pkg/VRM_VoltSts_if/gVRM_u16VBatADValue</REQUIRED-INTERFACE-TREF>
+                </R-PORT-PROTOTYPE>
+                <R-PORT-PROTOTYPE UUID="F4015279-FC83-4F3E-8564-A8A04CA31689">
+                  <SHORT-NAME>VRM_GetInterceptFlag</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <REQUIRED-COM-SPECS>
+                    <CLIENT-COM-SPEC>
+                      <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/IoHwAb_swc/Interfaces/VRM_GetInterceptFlag_If/Operation</OPERATION-REF>
+                    </CLIENT-COM-SPEC>
+                  </REQUIRED-COM-SPECS>
+                  <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/MICROSAR/IoHwAb_swc/Interfaces/VRM_GetInterceptFlag_If</REQUIRED-INTERFACE-TREF>
+                </R-PORT-PROTOTYPE>
+              </PORTS>
+              <INTERNAL-BEHAVIORS>
+                <SWC-INTERNAL-BEHAVIOR UUID="9ab5288b-7894-5d31-5e37-4411eba86db1">
+                  <SHORT-NAME>VRM_VoltSts</SHORT-NAME>
+                  <EVENTS>
+                    <OPERATION-INVOKED-EVENT UUID="6CE49811-4D8D-4C40-9C29-FFDE9894CF89">
+                      <SHORT-NAME>OIT_GetVoltSts_GetVoltStatus_Operation</SHORT-NAME>
+                      <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/VRM_VoltSts/GetVoltSts</START-ON-EVENT-REF>
+                      <OPERATION-IREF>
+                        <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/GetVoltStatus</CONTEXT-P-PORT-REF>
+                        <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/GetVoltStatus/Operation</TARGET-PROVIDED-OPERATION-REF>
+                      </OPERATION-IREF>
+                    </OPERATION-INVOKED-EVENT>
+                    <TIMING-EVENT UUID="546bb162-204b-5736-a359-adf5d32441dc">
+                      <SHORT-NAME>PeriodicEvent</SHORT-NAME>
+                      <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/VRM_VoltSts/VRM_VoltSts_vMainFunction</START-ON-EVENT-REF>
+                      <PERIOD>0.01</PERIOD>
+                    </TIMING-EVENT>
+                  </EVENTS>
+                  <PORT-API-OPTIONS>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="P-PORT-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/GetVoltStatus</PORT-REF>
+                    </PORT-API-OPTION>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="R-PORT-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/gVRM_u16VBatADValue</PORT-REF>
+                    </PORT-API-OPTION>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>true</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="R-PORT-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/VRM_GetInterceptFlag</PORT-REF>
+                    </PORT-API-OPTION>
+                  </PORT-API-OPTIONS>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY UUID="8EA26DAE-696E-4FDA-B970-ACD3DB9EC024">
+                      <SHORT-NAME>GetVoltSts</SHORT-NAME>
+                      <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                      <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                      <SYMBOL>GetVoltSts</SYMBOL>
+                    </RUNNABLE-ENTITY>
+                    <RUNNABLE-ENTITY UUID="3cd78539-9c73-5872-eb7f-d64f14e41c48">
+                      <SHORT-NAME>VRM_VoltSts_vInit</SHORT-NAME>
+                      <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                      <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                      <SYMBOL>VRM_VoltSts_vInit</SYMBOL>
+                    </RUNNABLE-ENTITY>
+                    <RUNNABLE-ENTITY UUID="f21be609-e532-57bb-7eba-a65fff3ad7e9">
+                      <SHORT-NAME>VRM_VoltSts_vMainFunction</SHORT-NAME>
+                      <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                      <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                      <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                        <VARIABLE-ACCESS UUID="3BE3F731-47CF-4F1C-8F90-5304FB0753F0">
+                          <SHORT-NAME>REC_gVRM_u16VBatADValue_Val</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/gVRM_u16VBatADValue</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_if/gVRM_u16VBatADValue/Val</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                      </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                      <SERVER-CALL-POINTS>
+                        <SYNCHRONOUS-SERVER-CALL-POINT UUID="9BC1A5E5-EDD3-46B4-8272-74F674B94B61">
+                          <SHORT-NAME>SC_VRM_GetInterceptFlag_Operation</SHORT-NAME>
+                          <OPERATION-IREF>
+                            <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/VRM_VoltSts_pkg/VRM_VoltSts_swc/VRM_VoltSts/VRM_GetInterceptFlag</CONTEXT-R-PORT-REF>
+                            <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/IoHwAb_swc/Interfaces/VRM_GetInterceptFlag_If/Operation</TARGET-REQUIRED-OPERATION-REF>
+                          </OPERATION-IREF>
+                        </SYNCHRONOUS-SERVER-CALL-POINT>
+                      </SERVER-CALL-POINTS>
+                      <SYMBOL>VRM_VoltSts_vMainFunction</SYMBOL>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+                </SWC-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

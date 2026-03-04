@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This file was saved with a tool from Vector Informatik GmbH-->
+<AUTOSAR xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00046.xsd" xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="CB097E7A-60D5-4B3B-8E04-B25B1F9F38C0">
+      <SHORT-NAME>VRM_InputsReading_pkg</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="164AD3E5-261E-4E53-B1FE-FA344C45F25B">
+          <SHORT-NAME>VRM_InputsReading_imp</SHORT-NAME>
+          <ELEMENTS>
+            <SWC-IMPLEMENTATION UUID="7beceb0d-0265-5c76-e0c8-bdd8533219d6">
+              <SHORT-NAME>VRM_InputsReading</SHORT-NAME>
+              <CODE-DESCRIPTORS>
+                <CODE UUID="EBBE83E0-E2F0-4079-BDC8-73884876CA2D">
+                  <SHORT-NAME>Default</SHORT-NAME>
+                  <ARTIFACT-DESCRIPTORS>
+                    <AUTOSAR-ENGINEERING-OBJECT>
+                      <CATEGORY>SWSRC</CATEGORY>
+                    </AUTOSAR-ENGINEERING-OBJECT>
+                  </ARTIFACT-DESCRIPTORS>
+                </CODE>
+              </CODE-DESCRIPTORS>
+              <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/VRM_InputsReading</BEHAVIOR-REF>
+            </SWC-IMPLEMENTATION>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE UUID="AE9CD1D1-200F-44D8-81A8-85072EF17D97">
+          <SHORT-NAME>VRM_InputsReading_swc</SHORT-NAME>
+          <ELEMENTS>
+            <APPLICATION-SW-COMPONENT-TYPE UUID="579854c2-cd58-56d7-4023-d58bd419c283">
+              <SHORT-NAME>VRM_InputsReading</SHORT-NAME>
+              <ADMIN-DATA>
+                <SDGS>
+                  <SDG GID="DV_SDG">
+                    <SD GID="DV_ReadOnly">1</SD>
+                  </SDG>
+                </SDGS>
+              </ADMIN-DATA>
+              <PORTS>
+                <P-PORT-PROTOTYPE UUID="BB27D4FE-4389-4899-B044-4E208B78EA3A">
+                  <SHORT-NAME>gASI_u16BatteryVolt_mv</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <PROVIDED-COM-SPECS>
+                    <NONQUEUED-SENDER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16BatteryVolt_mv/Val</DATA-ELEMENT-REF>
+                      <INIT-VALUE>
+                        <NUMERICAL-VALUE-SPECIFICATION>
+                          <VALUE>0</VALUE>
+                        </NUMERICAL-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                    </NONQUEUED-SENDER-COM-SPEC>
+                  </PROVIDED-COM-SPECS>
+                  <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16BatteryVolt_mv</PROVIDED-INTERFACE-TREF>
+                </P-PORT-PROTOTYPE>
+                <P-PORT-PROTOTYPE UUID="C4361858-CF8F-4541-8227-A3ADC75409BA">
+                  <SHORT-NAME>gASI_u16KL30_1Volt_mv</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <PROVIDED-COM-SPECS>
+                    <NONQUEUED-SENDER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16KL30_1Volt_mv/Val</DATA-ELEMENT-REF>
+                      <INIT-VALUE>
+                        <NUMERICAL-VALUE-SPECIFICATION>
+                          <VALUE>0</VALUE>
+                        </NUMERICAL-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                    </NONQUEUED-SENDER-COM-SPEC>
+                  </PROVIDED-COM-SPECS>
+                  <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16KL30_1Volt_mv</PROVIDED-INTERFACE-TREF>
+                </P-PORT-PROTOTYPE>
+                <P-PORT-PROTOTYPE UUID="2C562F5E-9A44-4D4C-BB30-91361F4771AA">
+                  <SHORT-NAME>gASI_u16KL30_2Volt_mv</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <PROVIDED-COM-SPECS>
+                    <NONQUEUED-SENDER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16KL30_2Volt_mv/Val</DATA-ELEMENT-REF>
+                      <INIT-VALUE>
+                        <NUMERICAL-VALUE-SPECIFICATION>
+                          <VALUE>0</VALUE>
+                        </NUMERICAL-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                    </NONQUEUED-SENDER-COM-SPEC>
+                  </PROVIDED-COM-SPECS>
+                  <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16KL30_2Volt_mv</PROVIDED-INTERFACE-TREF>
+                </P-PORT-PROTOTYPE>
+                <P-PORT-PROTOTYPE UUID="20E04A1C-CCBE-4971-8966-83559D7D5D28">
+                  <SHORT-NAME>gVRM_u16VBatADValue</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <PROVIDED-COM-SPECS>
+                    <NONQUEUED-SENDER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gVRM_u16VBatADValue/Val</DATA-ELEMENT-REF>
+                      <INIT-VALUE>
+                        <NUMERICAL-VALUE-SPECIFICATION>
+                          <VALUE>0</VALUE>
+                        </NUMERICAL-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                    </NONQUEUED-SENDER-COM-SPEC>
+                  </PROVIDED-COM-SPECS>
+                  <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gVRM_u16VBatADValue</PROVIDED-INTERFACE-TREF>
+                </P-PORT-PROTOTYPE>
+                <R-PORT-PROTOTYPE UUID="e585006a-a555-5fc2-4947-f7920f7ece8b">
+                  <SHORT-NAME>ADPOW</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:DEV">
+                        <SD GID="DV:ImportModePreset">Keep</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <REQUIRED-COM-SPECS>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_KL30_1_FV</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_VPUP1_FV</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_VPUP2_FV</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_KL30_2_FV</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_VPUP3_FV</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                    <NONQUEUED-RECEIVER-COM-SPEC>
+                      <DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_SLC_POWER_FV</DATA-ELEMENT-REF>
+                      <ALIVE-TIMEOUT>0</ALIVE-TIMEOUT>
+                      <ENABLE-UPDATE>false</ENABLE-UPDATE>
+                      <FILTER>
+                        <DATA-FILTER-TYPE>ALWAYS</DATA-FILTER-TYPE>
+                      </FILTER>
+                      <HANDLE-NEVER-RECEIVED>false</HANDLE-NEVER-RECEIVED>
+                    </NONQUEUED-RECEIVER-COM-SPEC>
+                  </REQUIRED-COM-SPECS>
+                  <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If</REQUIRED-INTERFACE-TREF>
+                </R-PORT-PROTOTYPE>
+              </PORTS>
+              <INTERNAL-BEHAVIORS>
+                <SWC-INTERNAL-BEHAVIOR UUID="d6dac8a9-8757-57db-70a1-511bf7abfc03">
+                  <SHORT-NAME>VRM_InputsReading</SHORT-NAME>
+                  <EVENTS>
+                    <TIMING-EVENT UUID="FDC2F987-C5AA-4A96-8A2B-0B88B2491AE1">
+                      <SHORT-NAME>PeriodicEvent</SHORT-NAME>
+                      <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/VRM_InputsReading/VRM_InputsReading_vMainFunction</START-ON-EVENT-REF>
+                      <PERIOD>0.01</PERIOD>
+                    </TIMING-EVENT>
+                  </EVENTS>
+                  <PORT-API-OPTIONS>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>true</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>true</INDIRECT-API>
+                      <PORT-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-REF>
+                    </PORT-API-OPTION>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gASI_u16BatteryVolt_mv</PORT-REF>
+                    </PORT-API-OPTION>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gASI_u16KL30_1Volt_mv</PORT-REF>
+                    </PORT-API-OPTION>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gASI_u16KL30_2Volt_mv</PORT-REF>
+                    </PORT-API-OPTION>
+                    <PORT-API-OPTION>
+                      <ENABLE-TAKE-ADDRESS>false</ENABLE-TAKE-ADDRESS>
+                      <ERROR-HANDLING>NO-TRANSFORMER-ERROR-HANDLING</ERROR-HANDLING>
+                      <INDIRECT-API>false</INDIRECT-API>
+                      <PORT-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gVRM_u16VBatADValue</PORT-REF>
+                    </PORT-API-OPTION>
+                  </PORT-API-OPTIONS>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY UUID="7226b46f-68a1-5208-2c08-e44c9931e21e">
+                      <SHORT-NAME>VRM_InputsReading_vInit</SHORT-NAME>
+                      <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                      <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                      <SYMBOL>VRM_InputsReading_vInit</SYMBOL>
+                    </RUNNABLE-ENTITY>
+                    <RUNNABLE-ENTITY UUID="2d5b416d-fe97-52c5-2f4b-0da425b47405">
+                      <SHORT-NAME>VRM_InputsReading_vMainFunction</SHORT-NAME>
+                      <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                      <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                      <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                        <VARIABLE-ACCESS UUID="B4AA70F7-B257-4837-8D63-0A05CFFC0B0B">
+                          <SHORT-NAME>REC_ADPOW_AD_KL30_1_FV</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_KL30_1_FV</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="C939B933-761B-4CDF-9402-E99AFFECEB78">
+                          <SHORT-NAME>REC_ADPOW_AD_KL30_2_FV</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_KL30_2_FV</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="F66935E3-6AC0-476E-A919-3B7833F8A8EB">
+                          <SHORT-NAME>REC_ADPOW_AD_SLC_POWER_FV</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_SLC_POWER_FV</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="3F2040CA-446D-4944-AD40-456EB360F25A">
+                          <SHORT-NAME>REC_ADPOW_AD_VPUP1_FV</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_VPUP1_FV</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="BBCCACF0-BFCB-4AE7-B379-836B897782B5">
+                          <SHORT-NAME>REC_ADPOW_AD_VPUP2_FV</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_VPUP2_FV</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="6F0F3CB9-9345-4964-85FD-2AF33BF120F0">
+                          <SHORT-NAME>REC_ADPOW_AD_VPUP3_FV</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/ADPOW</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/IoHwAb_swc/Interfaces/ADPOW_If/AD_VPUP3_FV</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                      </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                      <DATA-SEND-POINTS>
+                        <VARIABLE-ACCESS UUID="32F57807-33DA-40A9-BCEC-BBD750C16183">
+                          <SHORT-NAME>SEND_gASI_u16BatteryVolt_mv_Element</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gASI_u16BatteryVolt_mv</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16BatteryVolt_mv/Val</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="ABA74259-F881-42FA-A7C7-8318A22B37A0">
+                          <SHORT-NAME>SEND_gASI_u16KL30_1Volt_mv_Element</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gASI_u16KL30_1Volt_mv</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16KL30_1Volt_mv/Val</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="1CE19689-731B-4CB9-9CBD-0B617FEBD1D5">
+                          <SHORT-NAME>SEND_gASI_u16KL30_2Volt_mv_Element</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gASI_u16KL30_2Volt_mv</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gASI_u16KL30_2Volt_mv/Val</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                        <VARIABLE-ACCESS UUID="51B48ADE-0D1D-494A-9D06-356D2E8725D6">
+                          <SHORT-NAME>SEND_gVRM_u16VBatADValue_Val</SHORT-NAME>
+                          <ACCESSED-VARIABLE>
+                            <AUTOSAR-VARIABLE-IREF>
+                              <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_swc/VRM_InputsReading/gVRM_u16VBatADValue</PORT-PROTOTYPE-REF>
+                              <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/VRM_InputsReading_pkg/VRM_InputsReading_if/gVRM_u16VBatADValue/Val</TARGET-DATA-PROTOTYPE-REF>
+                            </AUTOSAR-VARIABLE-IREF>
+                          </ACCESSED-VARIABLE>
+                        </VARIABLE-ACCESS>
+                      </DATA-SEND-POINTS>
+                      <SYMBOL>VRM_InputsReading_vMainFunction</SYMBOL>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+                </SWC-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

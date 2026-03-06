@@ -671,3 +671,38 @@ void Tle941xy_WritePwmChn(uint8 u8GroupId, uint8 u8ChipId,uint8 u8PwmChn, uint8 
         sTle941xy_u8PwmDuty[u8GroupId][u8ChipId][u8PwmChn] = u8Val;
     }
 }
+
+
+Std_ReturnType Tle941xy_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle)
+{
+    Std_ReturnType l_u8RetVal = E_OK;
+
+    Tle941xy_PwmChnIdType* pu8PwmChnId= NULL;
+    if(ChannelId >= TLE941XY_PWM_CHANNEL_MAX)
+    {
+        pu8PwmChnId = &gTle941xy_PwmChnId[ChannelId];
+        Tle941xy_WritePwmChn(pu8PwmChnId->u8GroupId, pu8PwmChnId->u8ChipId, pu8PwmChnId->u8PwmChn, DutyCycle);
+    }
+    else
+    {
+        l_u8RetVal = E_NOT_OK;
+    }
+    return l_u8RetVal;
+}
+
+Std_ReturnType Tle941xy_WriteOHbChannel(uint8 ChannelId, uint8 Value)
+{
+    Std_ReturnType l_u8RetVal = E_OK;
+
+    Tle941xy_HbChnIdType* pu8HbChnId= NULL;
+    if(ChannelId >= TLE941XY_HB_CHANNEL_MAX)
+    {
+        pu8HbChnId = &gTle941xy_HbChnId[ChannelId];
+        Tle941xy_WriteHbChn(pu8HbChnId->u8GroupId, pu8HbChnId->u8ChipId, pu8HbChnId->u8HbChn, Value);
+    }
+    else
+    {
+        l_u8RetVal = E_NOT_OK;
+    }
+    return l_u8RetVal;
+}

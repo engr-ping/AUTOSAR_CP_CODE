@@ -170,6 +170,21 @@ typedef struct
     uint8 SYS_DIAG_7;
 }Tle941xy_RegDataType;
 
+typedef struct
+{
+    uint8 u8GroupId;
+    uint8 u8ChipId;
+    uint8 u8ChnId;
+}Tle941xy_PwmChnIdType;
+
+typedef struct
+{
+    uint8 u8GroupId;
+    uint8 u8ChipId;
+    uint8 u8ChnId;
+}Tle941xy_HbChnIdType;
+
+
 #endif
 
 

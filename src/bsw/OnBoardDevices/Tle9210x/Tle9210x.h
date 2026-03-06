@@ -23,7 +23,7 @@
 extern void Tle9210x_Init(void);
 extern void Tle9210x_MainFunction(void);
 extern void Tle9210x_DeInit(void);
-extern void Tle9210x_WriteOhbChn(uint8 u8GroupId, uint8 u8ChipId,uint8 u8ChnId, uint8 u8Val);
-extern void Tle9210x_WritePwmChn(uint8 u8GroupId, uint8 u8ChipId,uint8 u8PwmChn, uint8 u8Val);
+extern Std_ReturnType Tle9210x_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle);
+extern Std_ReturnType Tle9210x_WriteOHbChannel(uint8 ChannelId, uint8 Value);
 
 #endif

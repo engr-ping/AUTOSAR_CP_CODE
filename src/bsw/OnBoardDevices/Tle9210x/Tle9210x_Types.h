@@ -190,4 +190,18 @@ typedef struct
 }Tle9210x_GenStsRegType;
 
 
+typedef struct
+{
+    uint8 u8GroupId;
+    uint8 u8ChipId;
+    uint8 u8ChnId;
+}Tle9210x_PwmChnIdType;
+
+typedef struct
+{
+    uint8 u8GroupId;
+    uint8 u8ChipId;
+    uint8 u8ChnId;
+}Tle9210x_HbChnIdType;
+
 #endif

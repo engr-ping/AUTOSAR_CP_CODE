@@ -42,11 +42,16 @@ typedef enum
     TLE941XY_GROUP_MAX
 }Tle941xy_GroupId_e;
 
+#define TLE941XY_PWM_CHANNEL_MAX 12u
+#define TLE941XY_HB_CHANNEL_MAX 8u
+
 extern const Tle941xy_ChipType cTle941xy_atChipCfg[TLE941XY_GROUP_MAX][TLE941XY_CHIP_MAX];
 extern const Tle941xy_GroupType cTle941xy_atGroupCfg[TLE941XY_GROUP_MAX];
 extern const uint8 cTle941xy_au8ChnModeCfg[TLE941XY_GROUP_MAX][TLE941XY_CHIP_MAX][TLE941XY_CHANNEL_MAX];
 extern const Tle941xy_PwmType cTle941xy_atChipFmPwmFreqCfg[TLE941XY_GROUP_MAX][TLE941XY_CHIP_MAX];
 extern const boolean cTle941xy_abChipFreeWheelingCfg[TLE941XY_GROUP_MAX][TLE941XY_CHIP_MAX][TLE941XY_CHANNEL_MAX];
 extern const boolean cTle941xy_abChipHS1And2LedModeCfg[TLE941XY_GROUP_MAX][TLE941XY_CHIP_MAX][2];
+extern const Tle941xy_PwmChnIdType gTle941xy_PwmChnId[TLE941XY_PWM_CHANNEL_MAX];
+extern const Tle941xy_HbChnIdType gTle941xy_HbChnId[TLE941XY_HB_CHANNEL_MAX];
 
 #endif

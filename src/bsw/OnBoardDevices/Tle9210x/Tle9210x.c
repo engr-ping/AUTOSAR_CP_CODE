@@ -714,3 +714,38 @@ void Tle9210x_TriggerWdg(uint8 u8Group)
 
     Tle9210x_WriteReg(u8Group,l_au8RegBuf,l_au16DataBuf);
 }
+
+
+Std_ReturnType Tle9210x_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle)
+{
+    Std_ReturnType l_u8RetVal = E_OK;
+
+    Tle9210x_PwmChnIdType* pu8PwmChnId= NULL;
+    if(ChannelId >= TLE9210X_PWM_CHANNEL_MAX)
+    {
+        pu8PwmChnId = &gTle9210x_PwmChnId[ChannelId];
+        Tle9210x_WritePwmChn(pu8PwmChnId->u8GroupId, pu8PwmChnId->u8ChipId, pu8PwmChnId->u8PwmChn, DutyCycle);
+    }
+    else
+    {
+        l_u8RetVal = E_NOT_OK;
+    }
+    return l_u8RetVal;
+}
+
+Std_ReturnType Tle9210x_WriteOHbChannel(uint8 ChannelId, uint8 Value)
+{
+    Std_ReturnType l_u8RetVal = E_OK;
+
+    Tle9210x_HbChnIdType* pu8HbChnId= NULL;
+    if(ChannelId >= TLE9210X_HB_CHANNEL_MAX)
+    {
+        pu8HbChnId = &gTle9210x_HbChnId[ChannelId];
+        Tle9210x_WriteHbChn(pu8HbChnId->u8GroupId, pu8HbChnId->u8ChipId, pu8HbChnId->u8HbChn, Value);
+    }
+    else
+    {
+        l_u8RetVal = E_NOT_OK;
+    }
+    return l_u8RetVal;
+}

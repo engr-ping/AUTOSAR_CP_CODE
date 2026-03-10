@@ -20,7 +20,7 @@
 #ifndef VRM_TYPES_H
 #define VRM_TYPES_H
 
-#include "Platform_Types.h"
+#include "Std_Types.h"
 
 /* ============================================================
    Type Definitions - Voltage Status
@@ -39,7 +39,7 @@ typedef enum
     VRM_VOLTAGE_STATUS_OVR2NOR  = 8,
     VRM_VOLTAGE_STATUS_HIGH2NOR = 9,
     VRM_VOLTAGE_STATUS_NOR2HIGH = 10
-} VRM_VoltageStatusType;
+} Vrm_VoltageStatus_t;
 
 /* ============================================================
    Type Definitions - Voltage Compensation
@@ -62,7 +62,7 @@ typedef enum
     VRM_STATE_TYPE_B = 2,
     VRM_STATE_TYPE_C = 3,
     VRM_STATE_TYPE_D = 4
-} VRM_StateTypeDefinition;
+} Vrm_StateTypeDefinition_e;
 
 /* ============================================================
    Type Definitions - Main Status Structure
@@ -71,34 +71,34 @@ typedef enum
 typedef struct
 {
 #if (VRM_STATEFLOW_TYPE_A_NUM != 0)
-    uint32 TempCounterTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+    uint32 tempCounterTypeA[VRM_STATEFLOW_TYPE_A_NUM];
 #endif
 
 #if (VRM_STATEFLOW_TYPE_B_NUM != 0)
-    uint32 TempCounterTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+    uint32 tempCounterTypeB[VRM_STATEFLOW_TYPE_B_NUM];
 #endif
 
 #if (VRM_STATEFLOW_TYPE_C_NUM != 0)
-    uint32 TempCounterTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+    uint32 tempCounterTypeC[VRM_STATEFLOW_TYPE_C_NUM];
 #endif
 
 #if (VRM_DTC_TYPE_D_NUM != 0)
-    uint32 TempCounterTypeD[VRM_DTC_TYPE_D_NUM];
-    uint16 DtcVoltage[VRM_DTC_TYPE_D_NUM];
+    uint32 tempCounterTypeD[VRM_DTC_TYPE_D_NUM];
+    uint16 dtcVoltage[VRM_DTC_TYPE_D_NUM];
 #endif
-    uint16 Voltage;
+    uint16 voltage;
 #if (VRM_STATEFLOW_TYPE_A_NUM != 0)
-    VRM_VoltageStatusType VoltageStatusTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+    Vrm_VoltageStatus_t voltageStatusTypeA[VRM_STATEFLOW_TYPE_A_NUM];
 #endif
 #if (VRM_STATEFLOW_TYPE_B_NUM != 0)
-    VRM_VoltageStatusType VoltageStatusTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+    Vrm_VoltageStatus_t voltageStatusTypeB[VRM_STATEFLOW_TYPE_B_NUM];
 #endif
 #if (VRM_STATEFLOW_TYPE_C_NUM != 0)
-    VRM_VoltageStatusType VoltageStatusTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+    Vrm_VoltageStatus_t voltageStatusTypeC[VRM_STATEFLOW_TYPE_C_NUM];
 #endif
 #if (VRM_DTC_TYPE_D_NUM != 0)
-    VRM_VoltageStatusType VoltageStatusTypeD[VRM_DTC_TYPE_D_NUM];
+    Vrm_VoltageStatus_t voltageStatusTypeD[VRM_DTC_TYPE_D_NUM];
 #endif
-} VRM_VoltageStatusData;
+} Vrm_VoltageStatusData_t;
 
 #endif /* VRM_TYPES_H */

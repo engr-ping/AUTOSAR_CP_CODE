@@ -11,6 +11,7 @@ extern void Vn7x_Init(void);
 extern void Vn7x_DeInit(void);
 extern void Vn7x_MainFunction(void);
 extern void Vn7x_WriteDoChn(uint8 u8Chn, uint16 u16Val);
-
+extern Std_ReturnType Vn7x_PwmSetDutyCycle(uint16 ChannelId, uint16 DutyCycle);
+extern void Vn7x_DioWriteChannel(uint16 ChannelId, boolean Value);
 
 #endif

@@ -19,43 +19,43 @@
 #ifndef VRM_H
 #define VRM_H
 
-#include "VRM_Types.h"
-#include "VRM_Cfg.h"
-#include "VRM_VoltSts.h"
-#include "VRM_PupCtrl.h"
-#include "VRM_VoltageCompensate.h"
+#include "Vrm_Types.h"
+#include "Vrm_Cfg.h"
+#include "Vrm_VoltSts.h"
+#include "Vrm_PupCtrl.h"
+#include "Vrm_VoltageCompensate.h"
 
 /* ============================================================
    Exported MACRO Definitions                                       
    ============================================================ */
 
-#define VRM_CLR_INTERCEPT(Id)                            \
+#define Vrm_CLR_INTERCEPT(Id)                            \
 do                                                       \
 {                                                        \
-    VRM_InterceptEnableArray[Id] = FALSE;                \
+    Vrm_InterceptEnableArray[Id] = FALSE;                \
 }while(0);
 
-#define VRM_SET_INTERCEPT(Id)                            \
+#define Vrm_SET_INTERCEPT(Id)                            \
 do                                                       \
 {                                                        \
-    VRM_InterceptEnableArray[Id] = TRUE;                 \
+    Vrm_InterceptEnableArray[Id] = TRUE;                 \
 }while(0);
 
 /* ============================================================
    Exported Variables Definitions                                       
    ============================================================ */
 
-extern uint8 VRM_InterceptEnableArray[VRM_PID_SIZE];
+extern uint8 Vrm_InterceptEnableArray[VRM_PID_SIZE];
 
 /* ============================================================
    Exported Function Definitions                                       
    ============================================================ */
 
-extern void VRM_Init(void);
-extern void VRM_MainFunction10ms(void);
-extern void VRM_MainFunction10msWakeup(void);
-extern void VRM_Enable(void);
-extern void VRM_Disable(void);
+extern void Vrm_Init(void);
+extern void Vrm_MainFunction10ms(void);
+extern void Vrm_MainFunction10msWakeup(void);
+extern void Vrm_Enable(void);
+extern void Vrm_Disable(void);
     
 #endif /* VRM_H */
 

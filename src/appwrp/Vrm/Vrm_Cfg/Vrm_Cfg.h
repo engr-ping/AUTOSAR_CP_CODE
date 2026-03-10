@@ -21,7 +21,7 @@
 /* Include Headerfiles  */
 /* ===================                                                  */
 #include "IoHwAb_DigitalOutput_Cfg.h"
-#include "AdcIf_LCfg.h"
+#include "AdcIf.h"
 #include "PORT.h"
 #include "DioIf.h"
 
@@ -62,7 +62,7 @@ typedef enum
    VRM_STATE_TYPE_B_2,
    VRM_STATE_TYPE_C_1,
    VRM_STATE_TYPE_NO_MONITOR
-}VRM_StateType;
+}Vrm_StateType;
 
 /***********************    Global Type Definition    ************************/
 typedef enum
@@ -70,230 +70,13 @@ typedef enum
     VRM_PID_DUMMY,
 
     VRM_PID_OPH01,
-    VRM_PID_OPH02,
-    VRM_PID_OPH03,
-    VRM_PID_OPH04,
-    VRM_PID_OPH05,
-    VRM_PID_OPH06,
-    VRM_PID_OPH07,
-    VRM_PID_OPH08,
-    VRM_PID_OPH09,
-    VRM_PID_OPH10,
-    VRM_PID_OPH11,
-    VRM_PID_OPH12,
-    VRM_PID_OPH13,
-    VRM_PID_OPH14,
-    VRM_PID_OPH15,
-    VRM_PID_OPH16,
-    VRM_PID_OPH17,
-    VRM_PID_OPH18,
-    VRM_PID_OPH19,
-    VRM_PID_OPH20,
-    VRM_PID_OPH21,
-    VRM_PID_OPH22,
-    VRM_PID_OPH23,
-    VRM_PID_OPH24,
-    VRM_PID_OPH25,
-    VRM_PID_OPH26,
-    VRM_PID_OPH27,
-    VRM_PID_OPH28,
-    VRM_PID_OPH29,
-    VRM_PID_OPH30,
-    VRM_PID_OPH31,
-    VRM_PID_OPH32,
-    VRM_PID_OPH33,
-    VRM_PID_OPH34,
-    VRM_PID_OPH35,
-    VRM_PID_OPH36,
-    VRM_PID_OPH37,
-    VRM_PID_OPH38,
-    VRM_PID_OPH39,
-    VRM_PID_OPH40,
-    VRM_PID_OPH41,
-    VRM_PID_OPH42,
-    VRM_PID_OPH43,
-    VRM_PID_OPH44,
-    VRM_PID_OPH45,
-    
-    VRM_PID_OPL01,
-    
-    VRM_PID_OR01,
-    VRM_PID_OR02,
-    VRM_PID_OR03,
-    VRM_PID_OR04,
-    VRM_PID_OR05,
-    VRM_PID_OR06,
-    VRM_PID_OR07,
-    VRM_PID_OR08,
-    VRM_PID_OR09,
-    VRM_PID_OR10,
-    VRM_PID_OR11,
-    VRM_PID_OR12,
-    VRM_PID_OR13,
-    VRM_PID_OR14,
-    
-    VRM_PID_ODH01,
-    VRM_PID_ODH02,
-    VRM_PID_ODH03,
-    VRM_PID_ODH04,
-    VRM_PID_ODH05,
-    VRM_PID_ODH06,
-    VRM_PID_ODH07,
-    VRM_PID_ODH08,
-    
-    VRM_PID_ODL01,
-    VRM_PID_ODL02,
-    VRM_PID_ODL03,
-    VRM_PID_ODL04,
-    VRM_PID_ODL05,
-    VRM_PID_ODL06,
-    VRM_PID_ODL07,
-    VRM_PID_ODL08,
-    VRM_PID_ODL09,
-    VRM_PID_ODL10,
-    VRM_PID_ODL11,
-    VRM_PID_ODL12,
-    VRM_PID_ODL13,
-    VRM_PID_ODL14,
-    VRM_PID_ODL15,
-    VRM_PID_ODL16,
-    VRM_PID_ODL17,
-    VRM_PID_ODL18,
-    VRM_PID_ODL19,
-    VRM_PID_ODL20,
-    VRM_PID_ODL21,
-    VRM_PID_ODL22,
-    VRM_PID_ODL23,
-    VRM_PID_ODL24,
-    VRM_PID_ODL25,
-    VRM_PID_ODL26,
-    VRM_PID_ODL27,
-    VRM_PID_ODL28,
-    VRM_PID_ODL29,
-    VRM_PID_ODL30,
-    VRM_PID_ODL31,
-
     VRM_PID_SIZE
-} VRM_PhysicalId_e;
+} Vrm_PhysicalId_e;
 
 /**************************    Macro Definitions    **************************/
 #define VRM_FID_OPH01       (VRM_PID_OPH01)
-#define VRM_FID_OPH02       (VRM_PID_OPH02)
-#define VRM_FID_OPH03       (VRM_PID_OPH03)
-#define VRM_FID_OPH04       (VRM_PID_OPH04)
-#define VRM_FID_OPH05       (VRM_PID_OPH05)
-#define VRM_FID_OPH06       (VRM_PID_OPH06)
-#define VRM_FID_OPH07       (VRM_PID_OPH07)
-#define VRM_FID_OPH08       (VRM_PID_OPH08)
-#define VRM_FID_OPH09       (VRM_PID_OPH09)
-#define VRM_FID_OPH10       (VRM_PID_OPH10)
 
 
-#define VRM_FID_OPH11       (VRM_PID_OPH11)
-#define VRM_FID_OPH12       (VRM_PID_OPH12)
-#define VRM_FID_OPH13       (VRM_PID_OPH13)
-#define VRM_FID_OPH14       (VRM_PID_OPH14)
-#define VRM_FID_OPH15       (VRM_PID_OPH15) 
-#define VRM_FID_OPH16       (VRM_PID_OPH16)
-#define VRM_FID_OPH17       (VRM_PID_OPH17)
-#define VRM_FID_OPH18       (VRM_PID_OPH18) 
-#define VRM_FID_OPH19       (VRM_PID_OPH19) 
-#define VRM_FID_OPH20       (VRM_PID_OPH20) 
-
-#define VRM_FID_OPH21       (VRM_PID_OPH21) 
-#define VRM_FID_OPH22       (VRM_PID_OPH22) 
-#define VRM_FID_OPH23       (VRM_PID_OPH23) 
-#define VRM_FID_OPH24       (VRM_PID_OPH24) 
-#define VRM_FID_OPH25       (VRM_PID_OPH25) 
-#define VRM_FID_OPH26       (VRM_PID_OPH26) 
-#define VRM_FID_OPH27       (VRM_PID_OPH27) 
-#define VRM_FID_OPH28       (VRM_PID_OPH28) 
-#define VRM_FID_OPH29       (VRM_PID_OPH29) 
-#define VRM_FID_OPH30       (VRM_PID_OPH30) 
-
-#define VRM_FID_OPH31       (VRM_PID_OPH31) 
-#define VRM_FID_OPH32       (VRM_PID_OPH32) 
-#define VRM_FID_OPH33       (VRM_PID_OPH33) 
-#define VRM_FID_OPH34       (VRM_PID_OPH34) 
-#define VRM_FID_OPH35       (VRM_PID_OPH35) 
-#define VRM_FID_OPH36       (VRM_PID_OPH36) 
-#define VRM_FID_OPH37       (VRM_PID_OPH37) 
-#define VRM_FID_OPH38       (VRM_PID_OPH38) 
-#define VRM_FID_OPH39       (VRM_PID_OPH39) 
-#define VRM_FID_OPH40       (VRM_PID_OPH40) 
-
-#define VRM_FID_OPH41       (VRM_PID_OPH41) 
-#define VRM_FID_OPH42       (VRM_PID_OPH42) 
-#define VRM_FID_OPH43       (VRM_PID_OPH43) 
-#define VRM_FID_OPH44       (VRM_PID_OPH44) 
-#define VRM_FID_OPH45       (VRM_PID_OPH45) 
-
-#define VRM_FID_OPL01       (VRM_PID_OPL01) 
-
-#define VRM_FID_OR01       (VRM_PID_OR01) 
-#define VRM_FID_OR02       (VRM_PID_OR02) 
-#define VRM_FID_OR03       (VRM_PID_OR03) 
-#define VRM_FID_OR04       (VRM_PID_OR04) 
-#define VRM_FID_OR05       (VRM_PID_OR05) 
-#define VRM_FID_OR06       (VRM_PID_OR06) 
-#define VRM_FID_OR07       (VRM_PID_OR07) 
-#define VRM_FID_OR08       (VRM_PID_OR08) 
-#define VRM_FID_OR09       (VRM_PID_OR09) 
-#define VRM_FID_OR10       (VRM_PID_OR10) 
-#define VRM_FID_OR11       (VRM_PID_OR11) 
-#define VRM_FID_OR12       (VRM_PID_OR12) 
-#define VRM_FID_OR13       (VRM_PID_OR13) 
-#define VRM_FID_OR14       (VRM_PID_OR14) 
-
-#define VRM_FID_ODH01       (VRM_PID_ODH01) 
-#define VRM_FID_ODH02       (VRM_PID_ODH02) 
-#define VRM_FID_ODH03       (VRM_PID_ODH03) 
-#define VRM_FID_ODH04       (VRM_PID_ODH04) 
-//add
-#define VRM_FID_ODH05       (VRM_PID_ODH05) 
-#define VRM_FID_ODH06       (VRM_PID_ODH06) 
-#define VRM_FID_ODH07       (VRM_PID_ODH07) 
-#define VRM_FID_ODH08       (VRM_PID_ODH08) 
-
-
-#define VRM_FID_ODL01       (VRM_PID_ODL01) 
-#define VRM_FID_ODL02       (VRM_PID_ODL02) 
-#define VRM_FID_ODL03       (VRM_PID_ODL03) 
-#define VRM_FID_ODL04       (VRM_PID_ODL04) 
-#define VRM_FID_ODL05       (VRM_PID_ODL05) 
-#define VRM_FID_ODL06       (VRM_PID_ODL06) 
-#define VRM_FID_ODL07       (VRM_PID_ODL07) 
-#define VRM_FID_ODL08       (VRM_PID_ODL08) 
-#define VRM_FID_ODL09       (VRM_PID_ODL09) 
-#define VRM_FID_ODL10       (VRM_PID_ODL10) 
-
-#define VRM_FID_ODL11       (VRM_PID_ODL11) 
-#define VRM_FID_ODL12       (VRM_PID_ODL12) 
-#define VRM_FID_ODL13       (VRM_PID_ODL13) 
-#define VRM_FID_ODL14       (VRM_PID_ODL14) 
-#define VRM_FID_ODL15       (VRM_PID_ODL15) 
-#define VRM_FID_ODL16       (VRM_PID_ODL16) 
-#define VRM_FID_ODL17       (VRM_PID_ODL17) 
-#define VRM_FID_ODL18       (VRM_PID_ODL18) 
-#define VRM_FID_ODL19       (VRM_PID_ODL19) 
-#define VRM_FID_ODL20       (VRM_PID_ODL20) 
-
-#define VRM_FID_ODL21       (VRM_PID_ODL21) 
-#define VRM_FID_ODL22       (VRM_PID_ODL22) 
-#define VRM_FID_ODL23       (VRM_PID_ODL23) 
-#define VRM_FID_ODL24       (VRM_PID_ODL24) 
-#define VRM_FID_ODL25       (VRM_PID_ODL25) 
-#define VRM_FID_ODL26       (VRM_PID_ODL26) 
-#define VRM_FID_ODL27       (VRM_PID_ODL27) 
-#define VRM_FID_ODL28       (VRM_PID_ODL28) 
-#define VRM_FID_ODL29       (VRM_PID_ODL29) 
-#define VRM_FID_ODL30       (VRM_PID_ODL30)
-
-#define VRM_FID_ODL31       (VRM_PID_ODL31) 
-
-#define VRM_FID_SLC_PWM     (VRM_PID_DUMMY)
-#define VRM_FID_VREF01      (VRM_PID_DUMMY)
-#define VRM_FID_VREF02      (VRM_PID_DUMMY)
 #define VRM_FID_VREF03      (VRM_PID_DUMMY)
 
 /***************************************************************************************************/
@@ -503,73 +286,73 @@ typedef enum
 /****************************************************************************************************/
 /************************** Exported Constant Variables Definitions *********************************/
 /****************************************************************************************************/
-extern const boolean cVRM_abInterceptControlOnClose[VRM_PID_SIZE];
-extern const uint8 * cVRM_apu8OutPutState[VRM_PID_SIZE];
-extern const boolean cVRM_abInterceptState[VRM_PID_SIZE];
-extern const VRM_StateTypes_e cVRM_aeInterceptStateType[VRM_PID_SIZE];
-extern const IOHWAB_DoInrushTimerId_e gVRM_eChannelStateIndex[VRM_PID_SIZE];
+extern const boolean Vrm_interceptControlOnClose[VRM_PID_SIZE];
+extern const uint8 * Vrm_outputState[VRM_PID_SIZE];
+extern const boolean Vrm_interceptState[VRM_PID_SIZE];
+extern const Vrm_StateTypes_e Vrm_interceptStateType[VRM_PID_SIZE];
+extern const IOHWAB_DoInrushTimerId_e gVrm_channelStateIndex[VRM_PID_SIZE];
 
 //----------------------------------------------------------------------------
 /* flow type_A  Parameter */
 //----------------------------------------------------------------------------
 #if (VRM_STATEFLOW_TYPE_A_NUM != 0)
-extern const uint16 cVRM_au16LowThresholdFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16HighThresholdFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16LowHystFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16HighHystFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16N2LTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16L2UTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16L2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16H2OTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16N2HTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16H2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16U2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
-extern const uint16 cVRM_au16O2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16LowThresholdFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16HighThresholdFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16LowHystFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16HighHystFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16N2LTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16L2UTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16L2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16H2OTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16N2HTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16H2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16U2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+extern const uint16 Vrm_au16O2NTimeFlowTypeA[VRM_STATEFLOW_TYPE_A_NUM];
 #endif
 //----------------------------------------------------------------------------
 /* flow type_B  Parameter */
 //----------------------------------------------------------------------------
 #if (VRM_STATEFLOW_TYPE_B_NUM != 0)
-extern const uint16 cVRM_au16UnderThresholdFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
-extern const uint16 cVRM_au16OverThresholdFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
-extern const uint16 cVRM_au16LowHystFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
-extern const uint16 cVRM_au16HighHystFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
-extern const uint16 cVRM_au16U2NTimeFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
-extern const uint16 cVRM_au16O2NTimeFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+extern const uint16 Vrm_au16UnderThresholdFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+extern const uint16 Vrm_au16OverThresholdFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+extern const uint16 Vrm_au16LowHystFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+extern const uint16 Vrm_au16HighHystFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+extern const uint16 Vrm_au16U2NTimeFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+extern const uint16 Vrm_au16O2NTimeFlowTypeB[VRM_STATEFLOW_TYPE_B_NUM];
 #endif
 //----------------------------------------------------------------------------
 /* flow type_C  Parameter */
 //----------------------------------------------------------------------------
 #if (VRM_STATEFLOW_TYPE_C_NUM != 0)
-extern const uint16 cVRM_au16LowThresholdFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16HighThresholdFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16LowHystFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16HighHystFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16N2LTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16L2UTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16L2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16H2OTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16N2HTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16H2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16U2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
-extern const uint16 cVRM_au16O2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16LowThresholdFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16HighThresholdFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16LowHystFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16HighHystFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16N2LTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16L2UTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16L2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16H2OTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16N2HTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16H2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16U2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+extern const uint16 Vrm_au16O2NTimeFlowTypeC[VRM_STATEFLOW_TYPE_C_NUM];
 #endif
 //----------------------------------------------------------------------------
 /* flow type_D DTC  Parameter */
 //----------------------------------------------------------------------------
 #if (VRM_DTC_TYPE_D_NUM != 0)
-extern const uint16 cVRM_au16LowThresholdFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16HighThresholdFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16LowHystFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16HighHystFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16N2LTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16L2UTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16L2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16H2OTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16N2HTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16H2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16U2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
-extern const uint16 cVRM_au16O2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16LowThresholdFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16HighThresholdFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16LowHystFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16HighHystFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16N2LTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16L2UTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16L2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16H2OTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16N2HTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16H2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16U2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
+extern const uint16 Vrm_au16O2NTimeFlowDtcTypeD[VRM_DTC_TYPE_D_NUM];
 #endif
 
 #endif

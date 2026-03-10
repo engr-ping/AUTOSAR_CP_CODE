@@ -19,7 +19,7 @@
 #ifndef _PFM_TYPES_H
 #define _PFM_TYPES_H
 
-#include "Platform_Types.h"
+#include "Std_Types.h"
 
 typedef enum
 {

@@ -16,8 +16,8 @@
 
 /* Include Headerfiles  */                                             */
 
-#include "VRM.h"
-#include "Platform_Types.h"
+#include "Vrm.h"
+#include "Std_Types.h"
 
 /* Local Module RAM-Definitions (attribute static)                      */
 /* ===========================================                          */
@@ -27,43 +27,43 @@
 /* Exported Variables Definitions */
 /* ============================================================         */
 
-uint8 VRM_InterceptEnableArray[VRM_PID_SIZE];
+uint8 Vrm_InterceptEnableArray[Vrm_PID_SIZE];
 
 /****************************************************************
- process: VRM_Init
+ process: Vrm_Init
  purpose: VRM internal status init
  ****************************************************************/
-void VRM_Init(void)
+void Vrm_Init(void)
 {
     uint8 Index;
 
-    for (Index = 0U; Index < (uint8)VRM_PID_SIZE; Index++) 
+    for (Index = 0U; Index < (uint8)Vrm_PID_SIZE; Index++) 
     {
-        VRM_CLR_INTERCEPT(Index)
+        Vrm_CLR_INTERCEPT(Index)
     }
 }
 
 
 /****************************************************************
- process: VRM_MainFunction10ms
+ process: Vrm_MainFunction10ms
  purpose: called by 10ms task
  ****************************************************************/
-void VRM_MainFunction10ms(void)
+void Vrm_MainFunction10ms(void)
 { 
     /* update CompensateFactor */
-    VRM_CompensateFactorUpdatePup1();
-    VRM_CompensateFactorUpdatePup2();
-    VRM_CompensateFactorUpdatePup3();
+    Vrm_CompensateFactorUpdatePup1();
+    Vrm_CompensateFactorUpdatePup2();
+    Vrm_CompensateFactorUpdatePup3();
 }
 
 
 /****************************************************************
- process: VRM_MainFunction10msWakeup
+ process: Vrm_MainFunction10msWakeup
  purpose: called by 10ms wake pending task
  ****************************************************************/
-void VRM_MainFunction10msWakeup(void)
+void Vrm_MainFunction10msWakeup(void)
 { 
     /* update CompensateFactor */
-    VRM_CompensateFactorUpdatePup1();
+    Vrm_CompensateFactorUpdatePup1();
 }
 

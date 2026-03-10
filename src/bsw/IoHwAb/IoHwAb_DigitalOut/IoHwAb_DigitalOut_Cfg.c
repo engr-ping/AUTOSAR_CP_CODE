@@ -3,18 +3,29 @@
 *  Copyright (C) .                                                                            
 *  All rights reserved.                                                                                           
 ******************************************************************************************************************
-*  FileName: IoWrp_Actor                                                                                             
-*  Content:  Io wrapper actor module source file.
-*  Category: 
+*  FileName: IoHwAb_DigitalOut                                                                                             
+*  Content:   DigitalOut module of IoHwAb
+*  Category: IoHwAb DigitalOut
 ******************************************************************************************************************
 *  Revision Management                                                                                            
 *  yyyy.mm.dd    name              version      description                                                       
 *  ----------    --------          -------      -----------------------------------                               
-*  2025.12.31    clipping            v0001        Frist edit                                                        
+*  2026.03.09    clipping            v0001        Frist edit                                                        
 ******************************************************************************************************************
 ******************************************************************************************************************/
 /* Include Headerfiles  */
-/* ===================                                                  */
-#include "Std_Types.h"
+#include "IoHwAb_DigitalOut_Cfg.h"
 
+
+const IoHwAb_DigitalOut_ChannelConfig_t IoHwAb_Do_ChannelConfig[IOHWAB_DO_CHN_MAX] =
+{
+    {0u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {1u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {2u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {3u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {4u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {5u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {6u, 0u, 0u, 0u, 0u, 0u, 0u},
+    {7u, 0u, 0u, 0u, 0u, 0u, 0u}
+};
 

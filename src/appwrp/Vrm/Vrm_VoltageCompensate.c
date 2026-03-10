@@ -28,9 +28,9 @@
 
 /* Exported Variables Definitions */
 /* ============================================================         */
-uint16 VRM_KVPup1CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 */
-uint16 VRM_KVPup2CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 */
-uint16 VRM_KVPup3CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 */
+uint16 VRM_kvPup1CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 */
+uint16 VRM_kvPup2CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 */
+uint16 VRM_kvPup3CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 */
 
 
 
@@ -48,19 +48,19 @@ uint16 VRM_KVPup3CompensationFactor;              /* P1=0, P2=12288, P3=1, P4=0 
  ****************************************************************/
 void VRM_CompensateFactorUpdatePup1(void)
 {
-    VRM_KVPup1CompensationFactor = div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP1_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP1_R1 + VRM_PUP1_R2),(uint16)VRM_GET_AD_PUP1);
+    VRM_kvPup1CompensationFactor = div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP1_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP1_R1 + VRM_PUP1_R2),(uint16)VRM_GET_AD_PUP1);
 }
 
 /****************************************************************
  process: VRM_GetPup1CompensationFactor
  purpose: Get K value according to VPUP1 voltage 
  ****************************************************************/
-uint16 VRM_GetPup1CompensationFactor(uint16 u16PupFvAd)
+uint16 VRM_GetPup1CompensationFactor(uint16 pupFvAd)
 {
-    uint16 u16KVPup1;
+    uint16 kvPup1;
 
-    u16KVPup1 =  div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP1_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP1_R1 + VRM_PUP1_R2), u16PupFvAd);
-	return u16KVPup1;
+    kvPup1 =  div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP1_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP1_R1 + VRM_PUP1_R2), pupFvAd);
+	return kvPup1;
 }
 
 
@@ -70,19 +70,19 @@ uint16 VRM_GetPup1CompensationFactor(uint16 u16PupFvAd)
  ****************************************************************/
 void VRM_CompensateFactorUpdatePup2(void)
 {
-    VRM_KVPup2CompensationFactor = div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP2_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP2_R1 + VRM_PUP2_R2), (uint16)VRM_GET_AD_PUP2);
+    VRM_kvPup2CompensationFactor = div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP2_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP2_R1 + VRM_PUP2_R2), (uint16)VRM_GET_AD_PUP2);
 }
 
 /****************************************************************
  process: VRM_GetPup2CompensationFactor
  purpose: Get K value according to VPUP2 voltage 
  ****************************************************************/
-uint16 VRM_GetPup2CompensationFactor(uint16 u16PupFvAd)
+uint16 VRM_GetPup2CompensationFactor(uint16 pupFvAd)
 {
-    uint16 u16KVPup2;
+    uint16 kvPup2;
 
-    u16KVPup2 =  div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP2_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP2_R1 + VRM_PUP2_R2), u16PupFvAd);
-	return u16KVPup2;
+    kvPup2 =  div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP2_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP2_R1 + VRM_PUP2_R2), pupFvAd);
+	return kvPup2;
 }
 
 
@@ -92,19 +92,19 @@ uint16 VRM_GetPup2CompensationFactor(uint16 u16PupFvAd)
  ****************************************************************/
 void VRM_CompensateFactorUpdatePup3(void)
 {
-    VRM_KVPup3CompensationFactor = div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP3_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP3_R1 + VRM_PUP3_R2), (uint16)VRM_GET_AD_PUP3);
+    VRM_kvPup3CompensationFactor = div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP3_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP3_R1 + VRM_PUP3_R2), (uint16)VRM_GET_AD_PUP3);
 }
 
 /****************************************************************
  process: VRM_GetPup3CompensationFactor
  purpose: Get K value according to VPUP3 voltage 
  ****************************************************************/
-uint16 VRM_GetPup3CompensationFactor(uint16 u16PupFvAd)
+uint16 VRM_GetPup3CompensationFactor(uint16 pupFvAd)
 {
-    uint16 u16KVPup3;
+    uint16 kvPup3;
 
-    u16KVPup3 =  div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP3_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP3_R1 + VRM_PUP3_R2), u16PupFvAd);
-	return u16KVPup3;
+    kvPup3 =  div_U32U16_U16(VRM_BASIC_VOLTAGE / 1000u * VRM_PUP3_R2 * VRM_MAX_AD_HEX / 5u * VRM_COMPENSATE_PRECISION / (VRM_PUP3_R1 + VRM_PUP3_R2), pupFvAd);
+	return kvPup3;
 }
 
 
@@ -112,23 +112,23 @@ uint16 VRM_GetPup3CompensationFactor(uint16 u16PupFvAd)
  process: VRM_CompensateVoltage
  purpose: according to advalue and Compensate factor, cal new advalue 
  ****************************************************************/
-uint16 VRM_CompensateVoltage( uint16 AdValue, uint16 Factor )
+uint16 VRM_CompensateVoltage( uint16 adValue, uint16 factor )
 {
-    uint32 u32Tmp;
-    uint16 u16Rtn;
+    uint32 tmp;
+    uint16 rtn;
 
-    u32Tmp = (((uint32)AdValue * Factor)) / VRM_COMPENSATE_PRECISION;
+    tmp = (((uint32)adValue * factor)) / VRM_COMPENSATE_PRECISION;
 
-    if( u32Tmp > VRM_MAX_AD_HEX)
+    if( tmp > VRM_MAX_AD_HEX)
     {
-        u16Rtn = VRM_MAX_AD_HEX;
+        rtn = VRM_MAX_AD_HEX;
     }
     else
     {
-        u16Rtn = (uint16)u32Tmp;
+        rtn = (uint16)tmp;
     }
 
-    return(u16Rtn);
+    return(rtn);
 }
 
 
@@ -136,27 +136,27 @@ uint16 VRM_CompensateVoltage( uint16 AdValue, uint16 Factor )
  process: VRM_GetVoltageCompensation
  purpose: for different CompensateType,cal Compensate value
  ****************************************************************/
-uint16 VRM_GetVoltageCompensation( uint16 AdValue, uint8 CompensateType )
+uint16 VRM_GetVoltageCompensation( uint16 adValue, uint8 compensateType )
 {
-    uint16 u16Ret;
+    uint16 ret;
 
-    if( CompensateType == VRM_COMPENSATE_TYPE_PUP1 )
+    if( compensateType == VRM_COMPENSATE_TYPE_PUP1 )
     {
-        u16Ret = VRM_u16GetVoltCompPup1(AdValue);
+        ret = VRM_u16GetVoltCompPup1(adValue);
     }
-    else if( CompensateType == VRM_COMPENSATE_TYPE_PUP2 )
+    else if( compensateType == VRM_COMPENSATE_TYPE_PUP2 )
     {
-        u16Ret = VRM_u16GetVoltCompPup2(AdValue);
+        ret = VRM_u16GetVoltCompPup2(adValue);
     }
-	else if( CompensateType == VRM_COMPENSATE_TYPE_PUP3 )
+	else if( compensateType == VRM_COMPENSATE_TYPE_PUP3 )
     {
-        u16Ret = VRM_u16GetVoltCompPup3(AdValue);
+        ret = VRM_u16GetVoltCompPup3(adValue);
     }
     else
     {
-        u16Ret = AdValue;
+        ret = adValue;
     }
     
-    return u16Ret;
+    return ret;
 }
 

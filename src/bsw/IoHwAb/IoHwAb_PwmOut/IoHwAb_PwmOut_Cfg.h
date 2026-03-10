@@ -3,18 +3,23 @@
 *  Copyright (C) .                                                                            
 *  All rights reserved.                                                                                           
 ******************************************************************************************************************
-*  FileName: IoWrp_Actor                                                                                             
-*  Content:  Io wrapper actor module source file.
-*  Category: 
+*  FileName: IoHwAb_PwmOut                                                                                             
+*  Content:   PwmOut module of IoHwAb
+*  Category: IoHwAb PwmOut
 ******************************************************************************************************************
 *  Revision Management                                                                                            
 *  yyyy.mm.dd    name              version      description                                                       
 *  ----------    --------          -------      -----------------------------------                               
-*  2025.12.31    clipping            v0001        Frist edit                                                        
+*  2026.03.09    clipping            v0001        Frist edit                                                        
 ******************************************************************************************************************
 ******************************************************************************************************************/
 /* Include Headerfiles  */
-/* ===================                                                  */
-#include "Std_Types.h"
+#ifndef _IOHWAB_PWMOUT_CFG_H_
+#define _IOHWAB_PWMOUT_CFG_H_
 
+#include "IoHwAb_PwmOut_Types.h"
+#include "PwmIf.h"
 
+#define IOHWAB_PWMO_CHN_MAX 1U
+
+#endif /* _IOHWAB_PWMOUT_CFG_H_ */

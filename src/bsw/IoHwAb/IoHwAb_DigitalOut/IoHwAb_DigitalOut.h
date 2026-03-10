@@ -3,18 +3,20 @@
 *  Copyright (C) .                                                                            
 *  All rights reserved.                                                                                           
 ******************************************************************************************************************
-*  FileName: IoWrp_Actor                                                                                             
-*  Content:  Io wrapper actor module source file.
-*  Category: 
+*  FileName: IoHwAb_DigitalOut                                                                                             
+*  Content:   DigitalOut module of IoHwAb
+*  Category: IoHwAb DigitalOut
 ******************************************************************************************************************
 *  Revision Management                                                                                            
 *  yyyy.mm.dd    name              version      description                                                       
 *  ----------    --------          -------      -----------------------------------                               
-*  2025.12.31    clipping            v0001        Frist edit                                                        
+*  2026.03.09    clipping            v0001        Frist edit                                                        
 ******************************************************************************************************************
 ******************************************************************************************************************/
 /* Include Headerfiles  */
-/* ===================                                                  */
-#include "Std_Types.h"
+#ifndef _IOHWAB_DIGITALOUT_H_
+#define _IOHWAB_DIGITALOUT_H_
 
+#include "IoHwAb_DigitalOut_Types.h"
 
+#endif /* _IOHWAB_DIGITALOUT_H_ */

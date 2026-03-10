@@ -19,7 +19,7 @@
 #ifndef _VRM_VOLTSTS_H
 #define _VRM_VOLTSTS_H
 
-#include "VRM_Cfg.h"
+#include "Vrm_Cfg.h"
 
 typedef enum {
     VRM_VOLTAGE_STATUS_NORMAL   = 0,               /* Default value */
@@ -33,44 +33,44 @@ typedef enum {
     VRM_VOLTAGE_STATUS_OVR2NOR  = 8,
     VRM_VOLTAGE_STATUS_HIGH2NOR = 9,
     VRM_VOLTAGE_STATUS_NOR2HIGH = 10
-} VRM_VoltageStatus_e;
+} Vrm_VoltageStatus_e;
 
 typedef struct {
 #if (VRM_STATEFLOW_TYPE_A_NUM != 0)
-    uint32 u32TempCounterTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+    uint32 tempCounterTypeA[VRM_STATEFLOW_TYPE_A_NUM];
 #endif
 
 #if (VRM_STATEFLOW_TYPE_B_NUM != 0)
-    uint32 u32TempCounterTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+    uint32 tempCounterTypeB[VRM_STATEFLOW_TYPE_B_NUM];
 #endif
 
 #if (VRM_STATEFLOW_TYPE_C_NUM != 0)
-    uint32 u32TempCounterTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+    uint32 tempCounterTypeC[VRM_STATEFLOW_TYPE_C_NUM];
 #endif
 
 #if (VRM_DTC_TYPE_D_NUM != 0)
-    uint32 u32TempCounterTypeD[VRM_DTC_TYPE_D_NUM];
-    uint16 u16DtcVoltage[VRM_DTC_TYPE_D_NUM];
+    uint32 tempCounterTypeD[VRM_DTC_TYPE_D_NUM];
+    uint16 dtcVoltage[VRM_DTC_TYPE_D_NUM];
 #endif
-    uint16 u16Voltage;
+    uint16 voltage;
 #if (VRM_STATEFLOW_TYPE_A_NUM != 0)
-    VRM_VoltageStatus_e  VoltageStatusTypeA[VRM_STATEFLOW_TYPE_A_NUM];
+    Vrm_VoltageStatus_e  voltageStatusTypeA[VRM_STATEFLOW_TYPE_A_NUM];
 #endif
 #if (VRM_STATEFLOW_TYPE_B_NUM != 0)
-    VRM_VoltageStatus_e  VoltageStatusTypeB[VRM_STATEFLOW_TYPE_B_NUM];
+    Vrm_VoltageStatus_e  voltageStatusTypeB[VRM_STATEFLOW_TYPE_B_NUM];
 #endif
 #if (VRM_STATEFLOW_TYPE_C_NUM != 0)
-    VRM_VoltageStatus_e  VoltageStatusTypeC[VRM_STATEFLOW_TYPE_C_NUM];
+    Vrm_VoltageStatus_e  voltageStatusTypeC[VRM_STATEFLOW_TYPE_C_NUM];
 #endif
 #if (VRM_DTC_TYPE_D_NUM != 0)
-    VRM_VoltageStatus_e  VoltageStatusTypeD[VRM_DTC_TYPE_D_NUM];
+    Vrm_VoltageStatus_e  voltageStatusTypeD[VRM_DTC_TYPE_D_NUM];
 #endif
-} VRM_Status_t;
+} Vrm_Status_t;
 
-extern void VRM_DtcStep(void);
-extern void VRM_StatusFlowTypeCWakeup(void);
-extern void VRM_StatusStep(void);
-extern void VRM_StatusInit(void);
+extern void Vrm_DtcStep(void);
+extern void Vrm_StatusFlowTypeCWakeup(void);
+extern void Vrm_StatusStep(void);
+extern void Vrm_StatusInit(void);
 #endif
 
 

@@ -16,14 +16,14 @@
 
 /* Include Headerfiles  */
 
-#include "Rte_VRM_InputsReading.h" /* PRQA S 0857 */ /* MD_MSR_1.1_857 */
+#include "Rte_Vrm_InputsReading.h" /* PRQA S 0857 */ /* MD_MSR_1.1_857 */
 
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of include and declaration area >>        DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
-#include "VRM_Cfg.h"
-static uint16 VRM_InputDebounce( uint16 InputValue, uint16 * DebounceBuffer, uint8 DebounceTime );
+#include "Vrm_Cfg.h"
+static uint16 Vrm_InputDebounce( uint16 InputValue, uint16 * DebounceBuffer, uint8 DebounceTime );
 #define DEBOUNCE_VRM_TIME_MAX  (8u)
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of include and declaration area >>          DO NOT CHANGE THIS COMMENT!
@@ -60,11 +60,11 @@ static uint16 VRM_InputDebounce( uint16 InputValue, uint16 * DebounceBuffer, uin
 
 
 #define VRM_InputsReading_START_SEC_CODE
-#include "VRM_InputsReading_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+#include "Vrm_InputsReading_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
 
 /**********************************************************************************************************************
  *
- * Runnable Entity Name: VRM_InputsReading_vInit
+ * Runnable Entity Name: Vrm_InputsReading_vInit
  *
  *---------------------------------------------------------------------------------------------------------------------
  *
@@ -73,7 +73,7 @@ static uint16 VRM_InputDebounce( uint16 InputValue, uint16 * DebounceBuffer, uin
  *********************************************************************************************************************/
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of documentation area >>                  DO NOT CHANGE THIS COMMENT!
- * Symbol: VRM_InputsReading_vInit_doc
+ * Symbol: Vrm_InputsReading_vInit_doc
  *********************************************************************************************************************/
 
 
@@ -81,11 +81,11 @@ static uint16 VRM_InputDebounce( uint16 InputValue, uint16 * DebounceBuffer, uin
  * DO NOT CHANGE THIS COMMENT!           << End of documentation area >>                    DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 
-FUNC(void, VRM_InputsReading_CODE) VRM_InputsReading_vInit(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
+FUNC(void, Vrm_InputsReading_CODE) Vrm_InputsReading_vInit(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
 {
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
- * Symbol: VRM_InputsReading_vInit
+ * Symbol: Vrm_InputsReading_vInit
  *********************************************************************************************************************/
 
 
@@ -96,7 +96,7 @@ FUNC(void, VRM_InputsReading_CODE) VRM_InputsReading_vInit(void) /* PRQA S 0850 
 
 /**********************************************************************************************************************
  *
- * Runnable Entity Name: VRM_InputsReading_vMainFunction
+ * Runnable Entity Name: Vrm_InputsReading_vMainFunction
  *
  *---------------------------------------------------------------------------------------------------------------------
  *
@@ -123,12 +123,12 @@ FUNC(void, VRM_InputsReading_CODE) VRM_InputsReading_vInit(void) /* PRQA S 0850 
  *   Std_ReturnType Rte_Write_gASI_u16BatteryVolt_mv_Val(UInt16 data)
  *   Std_ReturnType Rte_Write_gASI_u16KL30_1Volt_mv_Val(UInt16 data)
  *   Std_ReturnType Rte_Write_gASI_u16KL30_2Volt_mv_Val(UInt16 data)
- *   Std_ReturnType Rte_Write_gVRM_u16VBatADValue_Val(UInt16 data)
+ *   Std_ReturnType Rte_Write_gVrm_u16VBatADValue_Val(UInt16 data)
  *
  *********************************************************************************************************************/
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of documentation area >>                  DO NOT CHANGE THIS COMMENT!
- * Symbol: VRM_InputsReading_vMainFunction_doc
+ * Symbol: Vrm_InputsReading_vMainFunction_doc
  *********************************************************************************************************************/
 
 
@@ -136,83 +136,83 @@ FUNC(void, VRM_InputsReading_CODE) VRM_InputsReading_vInit(void) /* PRQA S 0850 
  * DO NOT CHANGE THIS COMMENT!           << End of documentation area >>                    DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 
-FUNC(void, VRM_InputsReading_CODE) VRM_InputsReading_vMainFunction(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
+FUNC(void, Vrm_InputsReading_CODE) Vrm_InputsReading_vMainFunction(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
 {
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
- * Symbol: VRM_InputsReading_vMainFunction
+ * Symbol: Vrm_InputsReading_vMainFunction
  *********************************************************************************************************************/
-    uint16 tmp_u16Ext1AdValueFilted,tmp_u16Ext2AdValueFilted,tmp_u16BatAdValueFilted;
-    static uint16 sVRM_u16RawExt1AdValue[VRM_EXT1_DEBOUNCE_COUNT],sVRM_u16RawExt2AdValue[VRM_EXT2_DEBOUNCE_COUNT],    \
-                   sVRM_u16RawBatAdValue[VRM_BAT_DEBOUNCE_COUNT];
-    uint16 tmp_u16Ext1Ad,tmp_u16Ext2Ad,tmp_u16BatAd,tmp_u16Ext1Value,tmp_u16Ext2Value,tmp_u16BatValue;
-    static uint8 tmp_Ext1DebounceCnt = 0,tmp_Ext2DebounceCnt = 0,tmp_BatDebounceCnt = 0;
+    uint16 ext1AdValueFiltered, ext2AdValueFiltered, batAdValueFiltered;
+    static uint16 sVrm_rawExt1AdValue[VRM_EXT1_DEBOUNCE_COUNT], sVrm_rawExt2AdValue[VRM_EXT2_DEBOUNCE_COUNT],    \
+                   sVrm_rawBatAdValue[VRM_BAT_DEBOUNCE_COUNT];
+    uint16 ext1Ad, ext2Ad, batAd, ext1Value, ext2Value, batValue;
+    static uint8 ext1DebounceCnt = 0, ext2DebounceCnt = 0, batDebounceCnt = 0;
 
     /* Read the KL30_1 and KL30_2's AD value from Rte */
-    Rte_Read_ADPOW_AD_KL30_1_FV(&tmp_u16Ext1Ad);
-    Rte_Read_ADPOW_AD_KL30_2_FV(&tmp_u16Ext2Ad);
+    Rte_Read_ADPOW_AD_KL30_1_FV(&ext1Ad);
+    Rte_Read_ADPOW_AD_KL30_2_FV(&ext2Ad);
 
     /* Priority Ext1 highest, Ext2 second*/
-    if(tmp_u16Ext1Ad > VRM_DETA1)
+    if(ext1Ad > VRM_DETA1)
     {
-        if(tmp_u16Ext2Ad < (tmp_u16Ext1Ad - VRM_DETA1))  //Subtraction of Two Unsigned Variables may cause overflow, to be a bigger number
+        if(ext2Ad < (ext1Ad - VRM_DETA1))  //Subtraction of Two Unsigned Variables may cause overflow, to be a bigger number
         {
-            tmp_u16BatAd = tmp_u16Ext1Ad;
+            batAd = ext1Ad;
         }
         else
         {
-            tmp_u16BatAd = tmp_u16Ext2Ad;
+            batAd = ext2Ad;
         }
     }
     else
     {
-        tmp_u16BatAd = tmp_u16Ext2Ad;
+        batAd = ext2Ad;
     }
 
     /* Write Bat AD value to Rte */
-    (void)Rte_Write_gVRM_u16VBatADValue_Val(tmp_u16BatAd);          /* PRQA S 3426 */
+    (void)Rte_Write_gVrm_u16VBatADValue_Val(batAd);          /* PRQA S 3426 */
     
     /* Do debounce in vrm module */
-    tmp_u16Ext1AdValueFilted = VRM_InputDebounce(tmp_u16Ext1Ad, sVRM_u16RawExt1AdValue, VRM_EXT1_DEBOUNCE_COUNT);
-    tmp_u16Ext2AdValueFilted = VRM_InputDebounce(tmp_u16Ext2Ad, sVRM_u16RawExt2AdValue, VRM_EXT2_DEBOUNCE_COUNT);
-    tmp_u16BatAdValueFilted = VRM_InputDebounce(tmp_u16BatAd, sVRM_u16RawBatAdValue, VRM_BAT_DEBOUNCE_COUNT);
+    ext1AdValueFiltered = Vrm_InputDebounce(ext1Ad, sVrm_rawExt1AdValue, VRM_EXT1_DEBOUNCE_COUNT);
+    ext2AdValueFiltered = Vrm_InputDebounce(ext2Ad, sVrm_rawExt2AdValue, VRM_EXT2_DEBOUNCE_COUNT);
+    batAdValueFiltered = Vrm_InputDebounce(batAd, sVrm_rawBatAdValue, VRM_BAT_DEBOUNCE_COUNT);
 
     /* Ext1: Volt physical value and Write to Rte, uint/mV */
-    if(tmp_Ext1DebounceCnt >= VRM_EXT1_DEBOUNCE_COUNT)
+    if(ext1DebounceCnt >= VRM_EXT1_DEBOUNCE_COUNT)
     {
-        tmp_u16Ext1Value = VRM_CONVERT_AD2VOL_POW(tmp_u16Ext1AdValueFilted);        /* PRQA S 2983 */
-        (void)Rte_Write_gASI_u16KL30_1Volt_mv_Val(tmp_u16Ext1Value);                /* PRQA S 3112 */
+        ext1Value = VRM_CONVERT_AD2VOL_POW(ext1AdValueFiltered);        /* PRQA S 2983 */
+        (void)Rte_Write_gASI_u16KL30_1Volt_mv_Val(ext1Value);                /* PRQA S 3112 */
     }
     else
     { 
         /* Init 5 times, the volt value is defualt value: 12000mV */
-        tmp_Ext1DebounceCnt++;
+        ext1DebounceCnt++;
         (void)Rte_Write_gASI_u16KL30_1Volt_mv_Val(VRM_EXT1_AD2VOL_DEFAULT_VAL);      /* PRQA S 3112 */
     }
 
     /* Ext2: Volt physical value and Write to Rte, uint/mV */
-    if(tmp_Ext2DebounceCnt >= VRM_EXT2_DEBOUNCE_COUNT)
+    if(ext2DebounceCnt >= VRM_EXT2_DEBOUNCE_COUNT)
     {
-        tmp_u16Ext2Value = VRM_CONVERT_AD2VOL_POW(tmp_u16Ext2AdValueFilted);        /* PRQA S 2983 */
-        (void)Rte_Write_gASI_u16KL30_2Volt_mv_Val(tmp_u16Ext2Value);                /* PRQA S 3112 */
+        ext2Value = VRM_CONVERT_AD2VOL_POW(ext2AdValueFiltered);        /* PRQA S 2983 */
+        (void)Rte_Write_gASI_u16KL30_2Volt_mv_Val(ext2Value);                /* PRQA S 3112 */
     }
     else
     { 
         /* Init 5 times, the volt value is defualt value: 12000mV */
-        tmp_Ext2DebounceCnt++;
+        ext2DebounceCnt++;
         (void)Rte_Write_gASI_u16KL30_2Volt_mv_Val(VRM_EXT2_AD2VOL_DEFAULT_VAL);      /* PRQA S 3112 */
     }
 
     /*Bat: Volt physical value and Write to Rte, uint/mV */
-    if(tmp_BatDebounceCnt >= VRM_BAT_DEBOUNCE_COUNT)
+    if(batDebounceCnt >= VRM_BAT_DEBOUNCE_COUNT)
     {
-        tmp_u16BatValue = VRM_CONVERT_AD2VOL_POW(tmp_u16BatAdValueFilted);
-        (void)Rte_Write_gASI_u16BatteryVolt_mv_Val(tmp_u16BatValue);                 /* PRQA S 3426,3417 */
+        batValue = VRM_CONVERT_AD2VOL_POW(batAdValueFiltered);
+        (void)Rte_Write_gASI_u16BatteryVolt_mv_Val(batValue);                 /* PRQA S 3426,3417 */
     }
     else
     {
         /* Init 5 times, the volt value is defualt value: 12000mV */
-        tmp_BatDebounceCnt++;
+        batDebounceCnt++;
         (void)Rte_Write_gASI_u16BatteryVolt_mv_Val(VRM_BAT_AD2VOL_DEFAULT_VAL);      /* PRQA S 3426, 3417 */
     }
 
@@ -223,99 +223,99 @@ FUNC(void, VRM_InputsReading_CODE) VRM_InputsReading_vMainFunction(void) /* PRQA
 
 
 #define VRM_InputsReading_STOP_SEC_CODE
-#include "VRM_InputsReading_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+#include "Vrm_InputsReading_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
 
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of function definition area >>            DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
-static uint16 VRM_InputDebounce( uint16 InputValue, uint16 * DebounceBuffer, uint8 DebounceTime )
+static uint16 Vrm_InputDebounce( uint16 inputValue, uint16 * debounceBuffer, uint8 debounceTime )
 {
-    uint32  u32Sum;
-    uint16* pu16Tmp;
-    uint16  u16Ret;
-    uint16  u16Max;
-    uint16  u16Min;
+    uint32  sum;
+    uint16* tmpPtr;
+    uint16  ret;
+    uint16  max;
+    uint16  min;
     uint8   i;
 
-    if(DebounceTime == 0u)
+    if(debounceTime == 0u)
     {
         /* if debounce time is 0 or 1, output is input everytime.  */
-        u16Ret = InputValue;
+        ret = inputValue;
     }
     else 
     {
-        if(DebounceTime == 1u)
+        if(debounceTime == 1u)
         {
             /* if debounce time is 2, output is average value of current input and last time input.  */
-            u32Sum              = (uint32)(*DebounceBuffer) + (uint32)InputValue;
-            u16Ret              = (uint16)(u32Sum >> 1);
+            sum              = (uint32)(*debounceBuffer) + (uint32)inputValue;
+            ret              = (uint16)(sum >> 1);
         }
         else
         {
             /* The maximum of debounce time is DEBOUNCE_VRM_TIME_MAX */
-            if(DebounceTime > DEBOUNCE_VRM_TIME_MAX)
+            if(debounceTime > DEBOUNCE_VRM_TIME_MAX)
             {
-                DebounceTime  = DEBOUNCE_VRM_TIME_MAX;                        /* PRQA S 1338 */
+                debounceTime  = DEBOUNCE_VRM_TIME_MAX;                        /* PRQA S 1338 */
             }
 
             /* if debounce time is 2 or up 2. */
-            DebounceTime      = DebounceTime - 1u;                          /* PRQA S 1338 */
-            pu16Tmp             = DebounceBuffer + DebounceTime;             /* PRQA S 0488 */
+            debounceTime      = debounceTime - 1u;                          /* PRQA S 1338 */
+            tmpPtr             = debounceBuffer + debounceTime;             /* PRQA S 0488 */
 
             /* First remove maximum and minimum value. Then get the average value.  */
-            if( InputValue > *pu16Tmp )
+            if( inputValue > *tmpPtr )
             {
-                u16Max          = InputValue;
-                u16Min          = *pu16Tmp;
+                max          = inputValue;
+                min          = *tmpPtr;
             }
             else
             {
-                u16Max          = *pu16Tmp;
-                u16Min          = InputValue;
+                max          = *tmpPtr;
+                min          = inputValue;
             }
 
             /* Sum of the latest series inputs, except maximum and minimum. */
-            u32Sum              = 0;
-            for( i = 0; i < DebounceTime; i++ )
+            sum              = 0;
+            for( i = 0; i < debounceTime; i++ )
             {
-                *pu16Tmp        = *(pu16Tmp - 1);
-                pu16Tmp         = pu16Tmp - 1;
+                *tmpPtr        = *(tmpPtr - 1);
+                tmpPtr         = tmpPtr - 1;
 
-                if( *pu16Tmp > u16Max )
+                if( *tmpPtr > max )
                 {
-                    u32Sum     += u16Max;
-                    u16Max      = *pu16Tmp;
+                    sum     += max;
+                    max      = *tmpPtr;
                 }
-                else if( *pu16Tmp < u16Min )
+                else if( *tmpPtr < min )
                 {
-                    u32Sum     += u16Min;
-                    u16Min      = *pu16Tmp;
+                    sum     += min;
+                    min      = *tmpPtr;
                 }
                 else
                 {
-                    u32Sum     += *pu16Tmp;
+                    sum     += *tmpPtr;
                 }
             }
 
             /* Get the average value  */
-            u32Sum             /= DebounceTime;
+            sum             /= debounceTime;
 
-            if( u32Sum > 0xFFFFu)
+            if( sum > 0xFFFFu)
             {
-                u16Ret          = 0xFFFFu;
+                ret          = 0xFFFFu;
             }
             else
             {
-                u16Ret          = (uint16)u32Sum;
+                ret          = (uint16)sum;
             }
         }
 
         /* save current input unitl next time calculation. */
-        *DebounceBuffer        = InputValue; 
+        *debounceBuffer        = inputValue; 
     }
 
-    return(u16Ret);
+    return(ret);
 }
 
 /**********************************************************************************************************************

@@ -1,6 +1,6 @@
-cmake_minimum_required(version 3.14)
+cmake_minimum_required(VERSION 3.14)
 
-project(IOWRP_MODULE VERSION 1.0.0)
+project(ADCIF_MODULE VERSION 1.0.0)
 
 set(SOURCES )
 

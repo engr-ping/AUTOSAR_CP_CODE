@@ -1,0 +1,17 @@
+{
+  "platform_base_path": "/VOS_Platform/SwBaseTypes",
+  "basic_types": {
+    "boolean": "boolean",
+    "uint8": "uint8",
+    "uint16": "uint16",
+    "uint32": "uint32",
+    "uint64": "uint64",
+    "sint8": "sint8",
+    "sint16": "sint16",
+    "sint32": "sint32",
+    "sint64": "sint64",
+    "float32": "float32",
+    "float64": "float64"
+  },
+  "description": "基本类型平台引用配置。如果需要更改平台路径，请修改 platform_base_path 字段。"
+}

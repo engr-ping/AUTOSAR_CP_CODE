@@ -1,15 +1,17 @@
 #include "DioIf_Cfg.h"
 
-DioIf_ReadChannelCfgType gDioIf_aReadChannelCfg[DIOIF_DI_CHANNEL_MAX] =
+extern uint8 Dio_ReadChannel(const uint8 ChannelId);
+extern void Dio_WriteChannel(const uint8 ChannelId, uint8 Level);
+DioIf_ReadChannelCfgType DioIf_ReadChannelCfg[DIOIF_DI_CHANNEL_MAX] =
 {
-    {DioIf_ReadChannelFunc_Ch0, DIOIF_CHANNEL_0},
-    {DioIf_ReadChannelFunc_Ch1, DIOIF_CHANNEL_1},
-    {DioIf_ReadChannelFunc_Ch2, DIOIF_CHANNEL_2},
+    {Dio_ReadChannel, 0},
+    {Dio_ReadChannel, 1},
+    {Dio_ReadChannel, 2},
 };
 
-DioIf_WriteChannelCfgType gDioIf_aWriteChannelCfg[DIOIF_DO_CHANNEL_MAX] =
+DioIf_WriteChannelCfgType DioIf_WriteChannelCfg[DIOIF_DO_CHANNEL_MAX] =
 {
-    {DioIf_WriteChannelFunc_Ch0, DIOIF_CHANNEL_0},
-    {DioIf_WriteChannelFunc_Ch1, DIOIF_CHANNEL_1},
-    {DioIf_WriteChannelFunc_Ch2, DIOIF_CHANNEL_2},
+    {Dio_WriteChannel, 3},
+    {Dio_WriteChannel, 4},
+    {Dio_WriteChannel, 5},
 };

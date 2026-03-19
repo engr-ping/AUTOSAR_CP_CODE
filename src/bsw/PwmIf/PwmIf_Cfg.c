@@ -16,18 +16,22 @@
 /* Include Headerfiles  */
 #include "PwmIf_Cfg.h"
 
+
+extern void Pwm_SetDutyCycle(uint16 ChannelId, uint16 DutyCycle);
+extern void Pwm_GetDutyPeriodValue(uint16 ChannelId, uint16* Duty, uint16* Period);
+
 const PwmIf_SetDutyCycleCfgType gPwmIf_atSetDutyCycleCfg[PWMIF_PWMO_CHANNEL_MAX] =
 {
-    {PwmIf_SetDutyCycleFunc_Ch0, PwmConf_PwmChannel_0},
-    {PwmIf_SetDutyCycleFunc_Ch0, PwmConf_PwmChannel_1},
-    {PwmIf_SetDutyCycleFunc_Ch0, PwmConf_PwmChannel_2},
+    {Pwm_SetDutyCycle, 0},
+    {Pwm_SetDutyCycle, 1},
+    {Pwm_SetDutyCycle, 2},
 
 };
 
 const PwmIf_GetDutyPeriodValueCfgType gPwmIf_atGetDutyPeriodValueCfg[PWMIF_PWMI_CHANNEL_MAX] =
 {
-    {PwmIf_GetDutyPeriodValueFunc_Ch0, PwmConf_PwmChannel_0},
-    {PwmIf_GetDutyPeriodValueFunc_Ch0, PwmConf_PwmChannel_1},
-    {PwmIf_GetDutyPeriodValueFunc_Ch0, PwmConf_PwmChannel_2},
+    {Pwm_GetDutyPeriodValue, 0},
+    {Pwm_GetDutyPeriodValue, 1},
+    {Pwm_GetDutyPeriodValue, 2},
 
 };

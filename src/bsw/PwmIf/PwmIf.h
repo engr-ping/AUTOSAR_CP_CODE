@@ -20,6 +20,6 @@
 #include "PwmIf_Types.h"
 
 extern Std_ReturnType PwmIf_SetDutyCycle(uint16 ChannelId, uint16 DutyCycle);
-extern void PwmIf_GetDutyPeriodValue(uint16 ChannelId, uint16* Duty, uint16* Period)
+extern void PwmIf_GetDutyPeriodValue(uint16 ChannelId, uint16* Duty, uint16* Period);
 
 #endif /* _PWMIF_H_ */ 

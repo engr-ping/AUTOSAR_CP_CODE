@@ -1,9 +1,11 @@
 #include "AdcIf_Cfg.h"
 
+extern uint16 Adc_ReadChannel(uint16 ChannelId);
+
+
 AdcIf_ConvCfgType gAdcIf_atConvCfg[ADCIF_CHANNEL_MAX] =
 {
-    {AdcIf_ConvFunc_Ch0, AdcConf_AdcChannel_0},
-    {AdcIf_ConvFunc_Ch0, AdcConf_AdcChannel_1},
-    {AdcIf_ConvFunc_Ch0, AdcConf_AdcChannel_2},
-
+    {Adc_ReadChannel, 0},
+    {Adc_ReadChannel, 1},
+    {Adc_ReadChannel, 2},
 };

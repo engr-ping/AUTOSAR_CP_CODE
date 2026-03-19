@@ -1,0 +1,180 @@
+# toolchain_functions.cmake - 工具链配置函数库
+
+# 函数：配置编译器工具链
+# 用法：configure_toolchain(COMPILER gcc PATH "C:/tools/gcc-arm-none-eabi")
+function(configure_toolchain)
+    # 解析参数
+    set(options)
+    set(oneValueArgs COMPILER PATH)
+    set(multiValueArgs)
+    
+    cmake_parse_arguments(TOOLCHAIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    
+    # 检查必要参数
+    if(NOT TOOLCHAIN_COMPILER)
+        message(FATAL_ERROR "configure_toolchain: 必须指定 COMPILER 参数")
+    endif()
+
+    # 设置编译器类型
+    set(COMPILER_TYPE ${TOOLCHAIN_COMPILER})
+    # 设置工具链路径
+    if(TOOLCHAIN_PATH)
+        set(TOOLCHAIN_ROOT ${TOOLCHAIN_PATH} )
+        set(TOOLCHAIN_BIN "${TOOLCHAIN_PATH}/bin" )
+    else()
+        set(TOOLCHAIN_ROOT "")
+        set(TOOLCHAIN_BIN "")
+    endif()
+
+    if(WIN32)
+    set(EXE ".exe")
+    else()
+        set(EXE "")
+    endif()
+
+    # 根据编译器类型设置具体的编译器路径
+    if(TOOLCHAIN_COMPILER STREQUAL "gcc")
+        _setup_gcc_toolchain()
+        message(STATUS  "支持的编译器: ${TOOLCHAIN_COMPILER}")
+    elseif(TOOLCHAIN_COMPILER STREQUAL "clang")
+        _setup_clang_toolchain()
+        message(STATUS  "支持的编译器: ${TOOLCHAIN_COMPILER}")
+    elseif(TOOLCHAIN_COMPILER STREQUAL "tasking")
+        _setup_tasking_toolchain()
+        message(STATUS  "编译器位置: ${TOOLCHAIN_BIN}")
+        message(STATUS  "支持的编译器: ${TOOLCHAIN_COMPILER}")
+    elseif(TOOLCHAIN_COMPILER STREQUAL "ghs")
+        _setup_ghs_toolchain()
+        message(STATUS  "支持的编译器: ${TOOLCHAIN_COMPILER}")
+    else()
+        message(FATAL_ERROR "不支持的编译器: ${TOOLCHAIN_COMPILER}")
+    endif()
+    
+    # 输出配置信息
+    message(STATUS "===================================")
+    message(STATUS "工具链配置完成")
+    message(STATUS "编译器:   ${TOOLCHAIN_COMPILER}")
+    message(STATUS "安装路径: ${TOOLCHAIN_PATH}")
+    message(STATUS "C编译器:  ${CMAKE_C_COMPILER}")
+    message(STATUS "===================================")
+endfunction()
+
+# 内部函数：配置GCC工具链
+function(_setup_gcc_toolchain)
+    if(TOOLCHAIN_BIN)
+        set(CMAKE_C_COMPILER "${TOOLCHAIN_BIN}/arm-none-eabi-gcc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_CXX_COMPILER "${TOOLCHAIN_BIN}/arm-none-eabi-g++${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_ASM_COMPILER "${TOOLCHAIN_BIN}/arm-none-eabi-gcc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_OBJCOPY "${TOOLCHAIN_BIN}/arm-none-eabi-objcopy${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_OBJDUMP "${TOOLCHAIN_BIN}/arm-none-eabi-objdump${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_SIZE "${TOOLCHAIN_BIN}/arm-none-eabi-size${EXE}" CACHE FILEPATH "" FORCE)
+    else()
+        find_program(CMAKE_C_COMPILER arm-none-eabi-gcc REQUIRED)
+        find_program(CMAKE_CXX_COMPILER arm-none-eabi-g++ REQUIRED)
+        find_program(CMAKE_ASM_COMPILER arm-none-eabi-gcc REQUIRED)
+        find_program(CMAKE_OBJCOPY arm-none-eabi-objcopy REQUIRED)
+        find_program(CMAKE_OBJDUMP arm-none-eabi-objdump REQUIRED)
+        find_program(CMAKE_SIZE arm-none-eabi-size REQUIRED)
+        
+        set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
+        set(CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+        set(CMAKE_ASM_COMPILER ${CMAKE_ASM_COMPILER})
+        set(CMAKE_OBJCOPY ${CMAKE_OBJCOPY})
+        set(CMAKE_OBJDUMP ${CMAKE_OBJDUMP})
+        set(CMAKE_SIZE ${CMAKE_SIZE})
+    endif()
+    
+    set(CMAKE_C_COMPILER_ID "GNU")
+    set(CMAKE_CXX_COMPILER_ID "GNU")
+    set(CMAKE_C_COMPILER_ID_RUN TRUE)
+    set(CMAKE_CXX_COMPILER_ID_RUN TRUE)
+endfunction()
+
+# 内部函数：配置Clang工具链
+function(_setup_clang_toolchain)
+    if(TOOLCHAIN_BIN)
+        set(CMAKE_C_COMPILER "${TOOLCHAIN_BIN}/clang${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_CXX_COMPILER "${TOOLCHAIN_BIN}/clang++${EXE}" CACHE FILEPATH "" FORCE)
+        
+        # Clang可能需要指定sysroot
+        if(EXISTS "${TOOLCHAIN_ROOT}/arm-none-eabi")
+            set(CMAKE_SYSROOT "${TOOLCHAIN_ROOT}/arm-none-eabi" CACHE FILEPATH "" FORCE)
+        endif()
+    else()
+        find_program(CMAKE_C_COMPILER clang REQUIRED)
+        find_program(CMAKE_CXX_COMPILER clang++ REQUIRED)
+        set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
+        set(CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+    endif()
+    
+    set(CMAKE_C_COMPILER_TARGET "arm-none-eabi")
+    set(CMAKE_CXX_COMPILER_TARGET "arm-none-eabi")
+    set(CMAKE_C_COMPILER_ID "Clang")
+    set(CMAKE_CXX_COMPILER_ID "Clang")
+    set(CMAKE_C_COMPILER_ID_RUN TRUE)
+    set(CMAKE_CXX_COMPILER_ID_RUN TRUE)
+endfunction()
+
+# 内部函数：配置Tasking工具链
+function(_setup_tasking_toolchain)
+message(STATUS  "Tasking工具链路径: ${TOOLCHAIN_BIN}")
+    if(TOOLCHAIN_BIN)
+        message(STATUS  "Tasking工具链路径: ${TOOLCHAIN_BIN}")
+        set(CMAKE_C_COMPILER "${TOOLCHAIN_BIN}/cctc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_CXX_COMPILER "${TOOLCHAIN_BIN}/cctc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_ASM_COMPILER "${TOOLCHAIN_BIN}/astc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_LINKER "${TOOLCHAIN_BIN}/ltc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_AR "${TOOLCHAIN_BIN}/artc${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_SIZE "${TOOLCHAIN_BIN}/elfsize${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_OBJCOPY "${TOOLCHAIN_BIN}/elfpatch${EXE}" CACHE FILEPATH "" FORCE)
+
+    else()
+        message(FATAL_ERROR "Unsupported toolchain")
+        find_program(CMAKE_C_COMPILER cctc REQUIRED)
+        find_program(CMAKE_CXX_COMPILER cctc REQUIRED)
+        find_program(CMAKE_ASM_COMPILER astc REQUIRED)
+        find_program(CMAKE_LINKER ltc REQUIRED)
+        find_program(CMAKE_AR artc REQUIRED)
+        find_program(CMAKE_SIZE elfsize REQUIRED)
+        find_program(CMAKE_OBJCOPY elfpatch REQUIRED)
+        set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
+        set(CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+        set(CMAKE_ASM_COMPILER ${CMAKE_ASM_COMPILER})
+        set(CMAKE_LINKER ${CMAKE_LINKER})
+        set(CMAKE_AR ${CMAKE_AR})
+        set(CMAKE_SIZE ${CMAKE_SIZE})
+        set(CMAKE_OBJCOPY ${CMAKE_OBJCOPY})
+    endif()
+    
+    set(CMAKE_C_COMPILER_ID "Tasking")
+    set(CMAKE_CXX_COMPILER_ID "Tasking")
+    set(CMAKE_C_COMPILER_ID_RUN TRUE)
+    set(CMAKE_CXX_COMPILER_ID_RUN TRUE)
+endfunction()
+
+# 内部函数：配置GHS工具链
+function(_setup_ghs_toolchain)
+    if(TOOLCHAIN_BIN)
+        set(CMAKE_C_COMPILER "${TOOLCHAIN_BIN}/cxarm${EXE}" CACHE FILEPATH "" FORCE)
+        set(CMAKE_CXX_COMPILER "${TOOLCHAIN_BIN}/cxarm${EXE}" CACHE FILEPATH "" FORCE)
+    else()
+        find_program(CMAKE_C_COMPILER cxarm REQUIRED)
+        set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
+        set(CMAKE_CXX_COMPILER ${CMAKE_C_COMPILER})
+    endif()
+    
+    set(CMAKE_C_COMPILER_ID "GHS")
+    set(CMAKE_CXX_COMPILER_ID "GHS")
+    set(CMAKE_C_COMPILER_ID_RUN TRUE)
+    set(CMAKE_CXX_COMPILER_ID_RUN TRUE)
+endfunction()
+
+# 函数：获取编译器路径（用于后续判断）
+function(get_compiler_path VAR)
+    set(${VAR} ${TOOLCHAIN_BIN})
+endfunction()
+
+# 函数：获取编译器类型
+function(get_compiler_type VAR)
+    set(${VAR} ${COMPILER_TYPE})
+endfunction()

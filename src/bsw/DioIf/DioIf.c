@@ -1,25 +1,25 @@
 
-#include "AdcIf.h"
-#include "AdcIf_Cfg.h"
+#include "DioIf.h"
+#include "DioIf_Cfg.h"
 
 
-uint16 DioIf_ReadChannel(uint16 ChannelId)
+boolean DioIf_ReadChannel(uint16 ChannelId)
 {
-    uint16 u16AdcVal = 0u;
+    boolean DioVal = FALSE;
 
-    if(ChannelId < ADCIF_CHANNEL_MAX)
+    if(ChannelId < DIOIF_DI_CHANNEL_MAX)
     {
-      AdcIf_ConvCfgType* pConvCfg = &gAdcIf_atConvCfg[ChannelId];
+      DioIf_ReadChannelCfgType* pConvCfg = &DioIf_ReadChannelCfg[ChannelId];
         /* Call the conversion function to get the converted value */
-        u16AdcVal = pConvCfg->ConvFunc(pConvCfg->AdcChnId);
+        DioVal = pConvCfg->ReadChannelFunc(pConvCfg->DioChnId);
     }
     else
     {
-        /* Invalid ChannelId, return 0 or handle error as needed */
-        u16AdcVal = 0u;
+        /* Invalid ChannelId, return FALSE or handle error as needed */
+        DioVal = FALSE;
     }
 
-    return u16AdcVal;
+    return DioVal;
 }
 
 
@@ -27,11 +27,11 @@ Std_ReturnType DioIf_WriteChannel(uint16 ChannelId, boolean Value)
 {
     Std_ReturnType returnValue = E_OK;
 
-    if(ChannelId < ADCIF_CHANNEL_MAX)
+    if(ChannelId < DIOIF_DO_CHANNEL_MAX)
     {
-      AdcIf_ConvCfgType* pConvCfg = &gAdcIf_atConvCfg[ChannelId];
+      DioIf_WriteChannelCfgType* pConvCfg = &DioIf_WriteChannelCfg[ChannelId];
         /* Call the conversion function to set the value */
-        returnValue = pConvCfg->ConvFunc(pConvCfg->AdcChnId, Value);
+        returnValue = pConvCfg->WriteChannelFunc(pConvCfg->DioChnId, Value);
     }
     else
     {

@@ -1,12 +1,11 @@
-cmake_minimum_required(version 3.14)
+cmake_minimum_required(VERSION 3.24)
 
-project(BSW_MODULES VERSION 1.0.0)
 
 # Add all BSW modules
 add_subdirectory(AdcIf)
 add_subdirectory(DioIf)
 add_subdirectory(IoHwAb)
-add_subdirectory(OnBoardDevices)
+#add_subdirectory(OnBoardDevices)
 add_subdirectory(Pfm)
 add_subdirectory(PwmIf)
 

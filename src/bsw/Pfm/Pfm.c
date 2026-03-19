@@ -18,7 +18,6 @@
 /* ===================                                                  */
 #include "Pfm.h"
 #include "Pfm_Cfg.h"
-#include "dem.h"
 
 /* Module: Pfm - Power/Fault Management
    Abbreviations used:
@@ -269,7 +268,7 @@ static void Pfm_ReportError2DEM(const uint16 dtcId)
     }
     else
     {
-        (void)Dem_SetEventStatus(dtcId, DEM_EVENT_STATUS_FAILED); 
+        (void)PFM_DEM_SET_EVENT_STATUS(dtcId, PFM_DEM_EVENT_STATUS_FAILED); 
     }
 #endif
 }
@@ -283,7 +282,7 @@ static void Pfm_ClearError2DEM(const uint16 dtcId)
     }
     else
     {
-        (void)Dem_SetEventStatus(dtcId, DEM_EVENT_STATUS_PASSED); 
+        (void)PFM_DEM_SET_EVENT_STATUS(dtcId, PFM_DEM_EVENT_STATUS_PASSED); 
     }
 #endif
 }

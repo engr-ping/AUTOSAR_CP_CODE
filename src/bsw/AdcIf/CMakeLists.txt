@@ -1,25 +1,28 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.24)
 
-project(ADCIF_MODULE VERSION 1.0.0)
 
-set(SOURCES )
+set(MODULE_NAME AdcIf)
 
-file(GLOB_RECURSE TEMP_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
-list(APPEND SOURCES ${TEMP_SOURCES})
 
-add_library(${PROJECT_NAME} STATIC ${SOURCES})
-
-target_include_directories(${PROJECT_NAME}
-    PUBLIC 
-        ${CMAKE_CURRENT_SOURCE_DIR}
+# 在子目录的 CMakeLists.txt 中
+file(GLOB LIB_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.c
 )
 
-# Link with required libraries
-target_link_libraries(${PROJECT_NAME} 
-    PUBLIC 
+file(GLOB LIB_PUBLIC_HEADERS 
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.h
 )
 
-# Compile definitions
-target_compile_definitions(${PROJECT_NAME}
-    PRIVATE 
+
+# 使用封装的函数创建库
+submodule_add_library(${MODULE_NAME}
+    TYPE STATIC
+    VERSION 1.0.0
+    SOURCES
+        ${LIB_SOURCES}
+    PUBLIC_HEADERS
+        ${LIB_PUBLIC_HEADERS}
 )
+
+# 安装配置
+submodule_install_target(${MODULE_NAME})

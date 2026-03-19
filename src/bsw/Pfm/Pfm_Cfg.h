@@ -68,6 +68,10 @@ enum
 #define PFM_FID_VREF02    (PFM_PID_DUMMTY)
 #define PFM_FID_VREF03    (PFM_PID_DUMMTY)
 
+#define PFM_DEM_SET_EVENT_STATUS    //Dem_SetEventStatus
+#define PFM_DEM_EVENT_STATUS_PASSED    0
+#define PFM_DEM_EVENT_STATUS_FAILED 1
+
 extern const uint8 Pfm_DefectFilterTime[PFM_PID_SIZE][PFM_DDT_SIZE][PFM_DFC_SIZE];
 extern const uint16 Pfm_DefectDtcId[PFM_PID_SIZE][PFM_DDT_SIZE];
 extern const uint8 Pfm_InterceptEnableMask[PFM_PID_SIZE];

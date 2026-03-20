@@ -33,60 +33,23 @@
 #define INVERT_MC33978_DEFAULT             (0u)
 
 /* Digital Input Channel IDs */
-typedef enum
-{
-    IOHWAB_DI_CHN_IDL01 = 0,
-    IOHWAB_DI_CHN_IDL02,
-    IOHWAB_DI_CHN_IDL03,
-    IOHWAB_DI_CHN_IDL04,
-    IOHWAB_DI_CHN_IDL05,
-    IOHWAB_DI_CHN_IDL06,
-    IOHWAB_DI_CHN_IDL07,
-    IOHWAB_DI_CHN_IDL08,
-    IOHWAB_DI_CHN_IDL09,
-    IOHWAB_DI_CHN_IDL10,
-    IOHWAB_DI_CHN_IDL11,
-    IOHWAB_DI_CHN_IDL12,
-    IOHWAB_DI_CHN_IDL13,
-    IOHWAB_DI_CHN_IDL14,
-    IOHWAB_DI_CHN_IDL15,
-    IOHWAB_DI_CHN_IDL16,
-    IOHWAB_DI_CHN_IDL17,
-    IOHWAB_DI_CHN_IDL18,
-    IOHWAB_DI_CHN_IDL19,
-    IOHWAB_DI_CHN_IDL20,
-    IOHWAB_DI_CHN_IDL21,
-    IOHWAB_DI_CHN_IDL22,
-    IOHWAB_DI_CHN_IDL23,
-    IOHWAB_DI_CHN_IDL24,
-    IOHWAB_DI_CHN_IDL25,
-    IOHWAB_DI_CHN_IDL26,
-    IOHWAB_DI_CHN_IDL27,
-    IOHWAB_DI_CHN_IDL28,
-    IOHWAB_DI_CHN_IDL29,
-    IOHWAB_DI_CHN_IDL30,
-    IOHWAB_DI_CHN_IDL31,
-    IOHWAB_DI_CHN_IDL32,
-    IOHWAB_DI_CHN_IDL33,
-    IOHWAB_DI_CHN_IDL34,
-    IOHWAB_DI_CHN_IDH01,
-    IOHWAB_DI_CHN_IDH02,
-    IOHWAB_DI_CHN_IDH03,
-    IOHWAB_DI_CHN_IDH04,
-    IOHWAB_DI_CHN_IDX01,
-    IOHWAB_DI_CHN_IDX02,
-    IOHWAB_DI_CHN_IDX03,
-    IOHWAB_DI_CHN_IDX04,
-    IOHWAB_DI_CHN_IDX05,
-    IOHWAB_DI_CHN_IPL01,
-    IOHWAB_DI_CHN_IPL02,
-    IOHWAB_DI_CHN_IPL03,
-    IOHWAB_DI_CHN_IPL04,
-    IOHWAB_DI_CHN_IPL05,
-    IOHWAB_DI_CHN_IPL06,
-    IOHWAB_DI_CHN_IPL07,
-    IOHWAB_DI_CHN_MAX
-} IoHwAb_DiChannelId_e;
+#define DIO_CHN_IDL01 0u
+#define DIO_CHN_IDL02 1u
+#define DIO_CHN_IDL03 2u
+#define DIO_CHN_IDL04 3u
+#define DIO_CHN_IDL05 4u
+#define DIO_CHN_IDL06 5u
+#define DIO_CHN_IDL07 6u
+#define DIO_CHN_IDL08 7u
+#define DIO_CHN_IDL09 8u
+#define DIO_CHN_IDL10 9u
+#define DIO_CHN_IDL11 10u
+#define DIO_CHN_IDL12 11u
+#define DIO_CHN_IDL13 12u
+#define DIO_CHN_IDL14 13u
+#define DIO_CHN_IDL15 14u
+#define DIO_CHN_IDL16 15u
+#define DIO_CHN_IDL17 16u
 
 /* Wake-Up Channel IDs */
 typedef enum
@@ -129,7 +92,7 @@ typedef enum
 
 #define DEBOUNCE_DI_TIME_MAX    (8u)
 
-#define IOHWAB_DI_GET_POWER_ON_FLAG 
+#define IOHWAB_DI_GET_POWER_ON_FLAG  1 // need from wakeup mode
 
 extern boolean IoHwAb_Di_SignalValue[IOHWAB_DI_CHN_MAX];
 extern boolean gIoHwAb_abDiDiagIntSt[IOHWAB_DI_CHN_MAX];
@@ -140,7 +103,14 @@ extern boolean IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_WD_MAX];
 #include "MemMap.h"
 
 /* Channel Configuration */
-extern const IoHwAb_DigitalIn_ChannelType gIoHwAb_DiChannelCfg[IOHWAB_DI_CHN_MAX];
+extern const IoHwAb_DigitalIn_ChannelConfig_t IoHwAb_DiChannelCfg[IOHWAB_DI_CHN_MAX];
+
+extern boolean IoHwAb_Di_SignalValue[IOHWAB_DI_CHN_MAX];
+extern boolean IoHwAb_DigitalIn_diDiagIntSt[IOHWAB_DI_CHN_MAX];
+extern boolean IoHwAb_DigitalIn_diDiagIntEn[IOHWAB_DI_CHN_MAX];
+extern boolean IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_WD_MAX];
+
+
 
 /* Exported Function Definitions                                       */
 /* ===========================                                         */

@@ -43,31 +43,14 @@ boolean IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_WD_MAX];
 /* Digital Input Channel Configuration */
 const IoHwAb_DigitalIn_ChannelConfig_t IoHwAb_DiChannelCfg[IOHWAB_DI_CHN_MAX] = {
     /*ChannelID,Invert,DebounceTime,DebounceBuffer*/
-    {DIO_CHN_IDL01,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[0]},  /* IDL01 */
-    {DIO_CHN_IDL02,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[1]},  /* IDL02 */
-    {DIO_CHN_IDL03,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[2]},  /* IDL03 */
-    {DIO_CHN_IDL04,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[3]},  /* IDL04 */
-    {DIO_CHN_IDL05,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[4]},  /* IDL05 */
-    {DIO_CHN_IDL06,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[5]},  /* IDL06 */
-    {DIO_CHN_IDL07,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[6]},  /* IDL07 */
-    {DIO_CHN_IDL08,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[7]},  /* IDL08 */
-    {DIO_CHN_IDL09,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[8]},  /* IDL09 */
-    {DIO_CHN_IDL10,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[9]},  /* IDL10 */
-    {DIO_CHN_IDL11,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[10]}, /* IDL11 */
-    {DIO_CHN_IDL12,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[11]}, /* IDL12 */
-    {DIO_CHN_IDL13,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[12]}, /* IDL13 */
-    {DIO_CHN_IDL14,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[13]}, /* IDL14 */
-    {DIO_CHN_IDL15,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[14]}, /* IDL15 */
-    {DIO_CHN_IDL16,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[15]}, /* IDL16 */
-    {DIO_CHN_IDL17,  5u, INVERT_LOW_ACTIVE,IoHwAb_Di_DebBuf[16]}, /* IDL17 */
-
-
+    {DIO_CHN_IDL01,  5u, INVERT_LOW_ACTIVE,&IoHwAb_Di_DebBuf[0]},  /* IDL01 */
+    {DIO_CHN_IDL02,  5u, INVERT_LOW_ACTIVE,&IoHwAb_Di_DebBuf[1]},  /* IDL02 */
 };
 
 IoHwAb_DigitalIn_WakeUpConfig_t IoHwAb_DigitalIn_WakeUpSignal[IOHWAB_DI_WD_MAX] = {
     /* WakeUpId, DiChnnelId, Threshold, Condition */
-    {IOHWAB_DI_CHN_IDL09, &IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_CHN_IDL09]},
-    {IOHWAB_DI_CHN_IDL10, &IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_CHN_IDL10]},
+    {DIO_CHN_IDL09, &IoHwAb_Di_SignalWakeUpSaved[DIO_CHN_IDL09]},
+    {DIO_CHN_IDL09, &IoHwAb_Di_SignalWakeUpSaved[DIO_CHN_IDL09]},
 };
 
 #define SAC_START_SEC_CODE_RAM
@@ -142,6 +125,6 @@ void IoHwAb_DigitalIn_MainFunction_C0(void)
 {
     /* This function is called periodically to process the digital input signals. */
     /* The implementation of this function should read the raw digital input values and perform debouncing as needed. */
-    IoHwAb_Di_SignalValue[IOHWAB_DI_CHN_0] = IoHwAb_DigitalIn_ReadChannel(IOHWAB_DI_CHN_0);
-    Rte_Write_xxx_xxx(IoHwAb_Di_SignalValue[IOHWAB_DI_CHN_0]);
+    IoHwAb_Di_SignalValue[0] = IoHwAb_DigitalIn_ReadChannel(0);
+    Rte_Write_xxx_xxx(IoHwAb_Di_SignalValue[0]);
 }

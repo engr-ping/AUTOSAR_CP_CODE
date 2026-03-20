@@ -30,4 +30,11 @@ typedef struct
     uint8 inrushDelay;
 } IoHwAb_DigitalOut_ChannelConfig_t;
 
+/* External variable declarations */
+extern const IoHwAb_DigitalOut_ChannelConfig_t IoHwAb_Do_ChannelConfig[];
+extern boolean gPFM_abInterceptEnable[];
+extern boolean cPFM_abInterceptState[];
+extern boolean gVRM_abInterceptEnable[];
+extern boolean Vrm_abInterceptState[];
+
 #endif /* _IOHWAB_DIGITALOUT_TYPES_H_ */

@@ -15,8 +15,9 @@
 ******************************************************************************************************************/
 /* Include Headerfiles  */
 #include "IoHwAb_PwmOut_Cfg.h"
+#include "IoHwAb_PwmOut_Api.h"
 
-const IoHwAb_PwmOut_ChannelType IoHwAb_PwmOut_ChannelConfig[IOHWAB_PWMO_CHN_MAX] =
+const IoHwAb_PwmOut_ChannelConfig_t IoHwAb_PwmOut_ChannelConfig[IOHWAB_PWMO_CHN_MAX] =
 {
     {0u, 0u, 0u, 0u, 0u, 0u, 0u},
     {1u, 0u, 0u, 0u, 0u, 0u, 0u},

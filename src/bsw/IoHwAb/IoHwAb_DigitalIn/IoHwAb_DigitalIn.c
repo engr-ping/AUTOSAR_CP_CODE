@@ -17,6 +17,13 @@
 #include "IoHwAb_DigitalIn.h"
 #include "IoHwAb_DigitalIn_Cfg.h"
 
+#define	b_MASK						(uint8)0xFFu
+
+/* uint8 macros */
+#define SETBIT_U8(basis,bitpos)     ((basis) |= ((uint8)1 << (bitpos)), TRUE)
+#define CLRBIT_U8(basis,bitpos)     ((basis) &= b_MASK - ((uint8)1 << (bitpos)), FALSE)
+#define GETBIT_U8(basis,bitpos)     (((basis) & ((uint8)1 << (bitpos))) != 0)
+#define	PUTBIT_U8(basis,bitpos,val) ((val) ? SETBIT_U8(basis,bitpos) : CLRBIT_U8(basis,bitpos))
 /****************************************************************
  process: IoHwAb_DigitalIn_DebounceDigital
  purpose: Debounce processing for digital signals
@@ -127,7 +134,7 @@ static void IoHwAb_vFirstDebounceFinishProcess(void)
 boolean IoHwAb_DigitalIn_SignalProcess(uint8 channelId, boolean input, boolean * const output)
 {
     boolean tempDiSignalInput;
-    IoHwAb_DigitalIn_ChannelConfig_t* channelCfg = IoHwAb_DiChannelCfg[channelId];
+    const IoHwAb_DigitalIn_ChannelConfig_t* channelCfg = &IoHwAb_DiChannelCfg[channelId];
     /* Apply inversion if configured */
     tempDiSignalInput = input ^ channelCfg->invert;
 

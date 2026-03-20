@@ -34,6 +34,6 @@ typedef struct
     IoHwAb_AnalogIn_GetAdShiftFunc_t* getAdShiftFunc;
 } IoHwAb_AnalogIn_WakeUpConfig_t;
 
-#define NONE (void*)0
+#define NULL (void*)0
 
 #endif /* _IOHWAB_ANALOGIN_TYPES_H_ */

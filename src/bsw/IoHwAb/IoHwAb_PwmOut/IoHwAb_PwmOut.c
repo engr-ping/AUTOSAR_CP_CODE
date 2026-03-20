@@ -16,8 +16,13 @@
 /* Include Headerfiles  */
 #include "IoHwAb_PwmOut.h"
 #include "IoHwAb_PwmOut_Cfg.h"
-#include "VRM.h"
-#include "Pfm.h"
+#include "IoHwAb_PwmOut_Api.h"
+
+/* External variable declarations */
+extern boolean gPFM_abInterceptEnable[];
+extern boolean cPFM_abInterceptState[];
+extern boolean gVRM_abInterceptEnable[];
+extern boolean Vrm_abInterceptState[];
 
 /* Exported Variables Definitions */
 boolean IoHwAb_PwmOut_poDiagIntEn[IOHWAB_PO_CHN_MAX];
@@ -39,7 +44,7 @@ uint16 IoHwAb_PwmOut_SignalProcess(uint16 channelId, uint16 dutyCycle)
      uint16 ret;
      static uint8 sPwmOutInrushCount[IOHWAB_PWMO_CHN_MAX];
      uint16 tmpEnDiagDuty;
-     IoHwAb_PwmOut_ChannelConfig_t* channelConfigPtr = &IoHwAb_PwmOut_ChannelConfig[channelId];
+     const IoHwAb_PwmOut_ChannelConfig_t* channelConfigPtr = &IoHwAb_PwmOut_ChannelConfig[channelId];
      uint8 pfmFid = channelConfigPtr->pfmFid;
      uint8 vrmFid = channelConfigPtr->vrmFid;
      uint8 diagSrvId = channelConfigPtr->dsid;
@@ -68,14 +73,13 @@ uint16 IoHwAb_PwmOut_SignalProcess(uint16 channelId, uint16 dutyCycle)
 
     if(ret == 0u)//pwm output duty is 0
     {
-        //Pfm_EnableDiagnosic(pfmFid, (boolean)FALSE);
         sPwmOutInrushCount[inrushId] = 0u;
     }
     else if(inrushDelayTime != 0u)
     {
         if( (ret >= tmpEnDiagDuty) && (IoHwAb_PwmOut_poOld[inrushId] < tmpEnDiagDuty) )
         {
-            Pfm_EnableDiagnosic(pfmFid, (boolean)FALSE);
+            Pfm_EnableDiagnostic(pfmFid, (boolean)FALSE);
             sPwmOutInrushCount[inrushId] = 0u;
         }
         else if((ret >= tmpEnDiagDuty))
@@ -86,18 +90,18 @@ uint16 IoHwAb_PwmOut_SignalProcess(uint16 channelId, uint16 dutyCycle)
             }
             else
             {
-                Pfm_EnableDiagnosic(pfmFid, (boolean)TRUE);
+                Pfm_EnableDiagnostic(pfmFid, (boolean)TRUE);
             }
         }
         else
         {
-            Pfm_EnableDiagnosic(pfmFid, (boolean)FALSE);
+            Pfm_EnableDiagnostic(pfmFid, (boolean)FALSE);
             sPwmOutInrushCount[inrushId] = 0u;
         }
     }
     else
     {
-        Pfm_EnableDiagnosic(pfmFid, (boolean)TRUE);
+        Pfm_EnableDiagnostic(pfmFid, (boolean)TRUE);
         sPwmOutInrushCount[inrushId] = 0u;
     }
 
@@ -111,7 +115,7 @@ void IoHwAb_PwmOut_SetDutyCycle(uint16 channelId, uint16 dutyCycle)
 {
     uint16 tmp;
 
-    IoHwAb_PwmOut_ChannelConfig_t* channelConfigPtr = &IoHwAb_PwmOut_ChannelConfig[channelId];
+    const IoHwAb_PwmOut_ChannelConfig_t* channelConfigPtr = &IoHwAb_PwmOut_ChannelConfig[channelId];
     tmp = IoHwAb_PwmOut_SignalProcess(channelId, dutyCycle);
     PwmIf_SetDutyCycle(channelConfigPtr->pwmIfChannelId, tmp);
     IoHwAb_PwmOut_signalSts[channelId] = tmp;             
@@ -142,7 +146,6 @@ void IoHwAb_PwmOut_ClearChannelDiagInt(uint16 channelId)
  ****************************************************************/
 void IoHwAb_PwmOut_Init(void)
 {
-    uint8 i;
     (void)memset(IoHwAb_PwmOut_poDiagIntEn, 0u, sizeof(IoHwAb_PwmOut_poDiagIntEn));
     (void)memset(IoHwAb_PwmOut_poDiagIntSt, 0u, sizeof(IoHwAb_PwmOut_poDiagIntSt));
     (void)memset(IoHwAb_PwmOut_poOld, 0u, sizeof(IoHwAb_PwmOut_poOld));

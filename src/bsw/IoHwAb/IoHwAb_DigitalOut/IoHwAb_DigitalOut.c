@@ -16,7 +16,7 @@
 /* Include Headerfiles  */
 #include "IoHwAb_DigitalOut.h"
 #include "IoHwAb_DigitalOut_Cfg.h"
-#include "VRM.h"
+/* #include "VRM.h" */
 #include "Pfm.h"
 
 /* Exported Variables Definitions */
@@ -71,7 +71,7 @@ boolean IoHwAb_DigitalOut_SignalProcess(uint16 channelId, boolean outputRequest)
           the pfm diagnostic*/
         if((ret != (boolean)FALSE) && (IoHwAb_DigitalOut_doSignalOld[inrushId] == (boolean)FALSE) )
         {
-            Pfm_EnableDiagnosic(pfmFid, (boolean)FALSE);
+            Pfm_EnableDiagnostic(pfmFid, (boolean)FALSE);
             sDoInrushCount[inrushId] = 0U;
         }
         else
@@ -82,7 +82,7 @@ boolean IoHwAb_DigitalOut_SignalProcess(uint16 channelId, boolean outputRequest)
             }
             else
             {    /*In crash count is done, we shall Reenable the PFM diagnostic*/
-                Pfm_EnableDiagnosic(pfmFid, (boolean)TRUE);
+                Pfm_EnableDiagnostic(pfmFid, (boolean)TRUE);
             }
         }
     }

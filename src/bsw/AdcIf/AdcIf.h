@@ -3,6 +3,6 @@
 
 #include "AdcIf_Types.h"
 
-uint16 AdcIf_ReadChannel(uint16 ChannelId);
+extern uint16 AdcIf_ReadChannel(uint16 ChannelId);
 
 #endif /* _ADCIF_H_ */ 

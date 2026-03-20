@@ -1,5 +1,5 @@
 #add_subdirectory(app)
-#add_subdirectory(appwrp)
+add_subdirectory(appwrp)
 add_subdirectory(bsw)
 #add_subdirectory(bswlib)
 #add_subdirectory(conf)

@@ -18,9 +18,13 @@
 
 #include "IoHwAb_AnalogIn.h"
 #include "IoHwAb_AnalogIn_Cfg.h"
+#include "IoHwAb_AnalogIn_Api.h"
 
 uint16 IoHwAb_AnalogIn_aiDiagIntSt[IOHWAB_AI_CHN_MAX];
 boolean IoHwAb_AnalogIn_aiDiagIntEn[IOHWAB_AI_CHN_MAX];
+
+
+extern uint16 Vrm_GetVoltageCompensation(uint16 AdValue, uint8 CompensateType);
 
 
 static uint16 IoHwAb_AnalogIn_DebounceAnalog( uint16 input, uint16 * debounceBuf, uint8 debounceTime )
@@ -109,10 +113,10 @@ uint16 IoHwAb_AnalogIn_SignalProcess(uint16 channelId)
 {
     uint16 tmp;
     uint16 retVal;
-    IoHwAb_AnalogIn_ChannelConfig_t* channelCfg = &IoHwAb_AnalogIn_ChannelCfg[channelId];
+    const IoHwAb_AnalogIn_ChannelConfig_t* channelCfg = &IoHwAb_AnalogIn_ChannelCfg[channelId];
     uint16 adValue = AdcIf_ReadChannel(channelId);
 
-    tmp = VRM_u16GetVoltageCompensate(adValue, channelCfg->vrmCompenstate);
+    tmp = Vrm_GetVoltageCompensation(adValue, channelCfg->vrmCompenstate);
     retVal = IoHwAb_AnalogIn_DebounceAnalog(tmp, channelCfg->debounceBuff, channelCfg->debounceCnt);
     return retVal;
 }
@@ -153,8 +157,8 @@ void IoHwAb_AnalogIn_Init(void)
 void IoHwAb_AnalogIn_EnterSleep(void)
 {
     uint8 i;
-    IoHwAb_AnalogIn_WakeUpConfig_t* wakeUpCfg = NULL;
-    IoHwAb_AnalogIn_ChannelConfig_t* channelCfg = NULL;
+    const IoHwAb_AnalogIn_WakeUpConfig_t* wakeUpCfg = NULL;
+    const IoHwAb_AnalogIn_ChannelConfig_t* channelCfg = NULL;
     for(i = 0u; i < IOHWAB_AI_WD_MAX; i++)
     {
         wakeUpCfg = &IoHwAb_AnalogIn_WakeUpSignal[i];
@@ -174,8 +178,8 @@ void IoHwAb_AnalogIn_EnterSleep(void)
 void IoHwAb_AnalogIn_SignalConfirmProcess( uint16 wkChannelId)
 {
     uint8 ii;
-    IoHwAb_AnalogIn_WakeUpConfig_t* wakeUpCfgPtr = &IoHwAb_AnalogIn_WakeUpSignal[wkChannelId];
-    IoHwAb_AnalogIn_ChannelConfig_t* channelCfg = &IoHwAb_AnalogIn_ChannelCfg[wakeUpCfgPtr->aiChannelId];
+    const IoHwAb_AnalogIn_WakeUpConfig_t* wakeUpCfgPtr = &IoHwAb_AnalogIn_WakeUpSignal[wkChannelId];
+    const IoHwAb_AnalogIn_ChannelConfig_t* channelCfg = &IoHwAb_AnalogIn_ChannelCfg[wakeUpCfgPtr->aiChannelId];
     uint16 adValue = IoHwAb_AnalogIn_SignalVal[wakeUpCfgPtr->aiChannelId];
 
     if(channelCfg->debounceCnt > 0u)

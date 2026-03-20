@@ -33,4 +33,12 @@ typedef struct
     uint8* wkSaveValue;
 } IoHwAb_DigitalIn_WakeUpConfig_t;
 
+typedef struct
+{
+    uint8 channelId;
+    uint8 invert;
+    uint8 debounceTime;
+    uint8* debounceBuf;
+} IoHwAb_DigitalIn_ChannelType;
+
 #endif /* _IOHWAB_DIGITALIN_TYPES_H_ */

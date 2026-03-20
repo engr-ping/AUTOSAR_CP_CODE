@@ -23,19 +23,19 @@ uint16 IoHwAb_AnalogIn_SignalWakeUpSaved[IOHWAB_AI_WD_MAX];
 const IoHwAb_AnalogIn_WakeUpConfig_t IoHwAb_AnalogIn_WakeUpSignal[IOHWAB_AI_WD_MAX] =
 {
     /*WakeUp Signal ,GetAdShiftFunc*/
-    {IOHWAB_AI_CHN_0, NONE},  /*WakeUp Signal for Channel 0*/
-    {IOHWAB_AI_CHN_1, NONE},  /*WakeUp Signal for Channel 1*/
-    {IOHWAB_AI_CHN_2, NONE},  /*WakeUp Signal for Channel 2*/
-    {IOHWAB_AI_CHN_3, NONE},  /*WakeUp Signal for Channel 3*/
-    {IOHWAB_AI_CHN_4, NONE},  /*WakeUp Signal for Channel 4*/
+    {IOHWAB_AI_CHN_0, NULL},  /*WakeUp Signal for Channel 0*/
+    {IOHWAB_AI_CHN_1, NULL},  /*WakeUp Signal for Channel 1*/
+    {IOHWAB_AI_CHN_2, NULL},  /*WakeUp Signal for Channel 2*/
+    {IOHWAB_AI_CHN_3, NULL},  /*WakeUp Signal for Channel 3*/
+    {IOHWAB_AI_CHN_4, NULL},  /*WakeUp Signal for Channel 4*/
 };
 
 const IoHwAb_AnalogIn_ChannelConfig_t IoHwAb_AnalogIn_ChannelCfg[IOHWAB_AI_CHN_MAX] =
 {
     /* Voltage Compensation Type, Debounce Count, Debounce Buffer */
-    {VRM_COMPENSATE_TYPE_PUP1, 0, NONE},  /*Channel 0*/
-    {VRM_COMPENSATE_TYPE_PUP2, 0, NONE},  /*Channel 1*/
-    {VRM_COMPENSATE_TYPE_NONE, 0, NONE},  /*Channel 2*/
+    {VRM_COMPENSATE_TYPE_PUP1, 0, NULL},  /*Channel 0*/
+    {VRM_COMPENSATE_TYPE_PUP2, 0, NULL},  /*Channel 1*/
+    {VRM_COMPENSATE_TYPE_NONE, 0, NULL},  /*Channel 2*/
 };
 
 

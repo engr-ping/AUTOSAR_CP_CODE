@@ -23,4 +23,6 @@
 #define IOHWAB_PC_DEBOUNCE_TIME_MAX     (8u)
 #define IOHWAB_PC_CHN_MAX               5u
 
+extern const IoHwAb_PwmCap_ChannelConfig_t IoHwAb_Pc_ChannelConfig[IOHWAB_PC_CHN_MAX];
+
 #endif /* _IOHWAB_PWMCAP_CFG_H_ */

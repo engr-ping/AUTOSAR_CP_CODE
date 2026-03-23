@@ -53,6 +53,10 @@ ComWrp
 IOHWAB 架构
 ![IOHWAB ARCH](./doc/image/IoHwab_Arch.png)
 
+VRM
+
+![p1774250199437](./doc/image/Vrm_arch.png)
+
 
 ## 编译
 本仓库以cmake为主，博主makefile语法有待提到

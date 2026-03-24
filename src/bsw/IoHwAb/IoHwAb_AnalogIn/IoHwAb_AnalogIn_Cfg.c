@@ -47,3 +47,17 @@ void IoHwAb_AnalogIn_MainFunction_C0(void)
     IoHwAb_AnalogIn_SignalVal[IOHWAB_AI_CHN_0] = IoHwAb_AnalogIn_ReadChannel(IOHWAB_AI_CHN_0);
     Rte_Write_xxx_xxx(IoHwAb_AnalogIn_SignalVal[IOHWAB_AI_CHN_0]);
 }
+
+void IoHwAb_AnalogIn_MainFunction_C1(void)
+{
+    /* This function is called periodically to process the analog input signals. */
+    /* The implementation of this function should read the raw ADC values, apply voltage compensation, and perform debouncing as needed. */
+    IoHwAb_AnalogIn_SignalVal[IOHWAB_AI_CHN_1] = IoHwAb_AnalogIn_ReadChannel(IOHWAB_AI_CHN_1);
+    Rte_Write_xxx_xxx(IoHwAb_AnalogIn_SignalVal[IOHWAB_AI_CHN_1]);
+}
+
+
+uint16 IoHwAb_AnalogIn_ReadChannel_CHN0_C0(void)
+{
+    return IoHwAb_AnalogIn_ReadChannel(IOHWAB_AI_CHN_0);
+}

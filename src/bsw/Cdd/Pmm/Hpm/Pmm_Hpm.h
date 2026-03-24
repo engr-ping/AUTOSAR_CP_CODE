@@ -3,45 +3,39 @@
 *  Copyright (C) .                                                                            
 *  All rights reserved.                                                                                           
 ******************************************************************************************************************
-*  FileName: Pfm                                                                                             
-*  Content:  Power device fault management module source file.
-*  Category: 
+*  FileName: Pmm_Smc                                                                                             
+*  Content:  Power Mode Management for High Power Mode
+*  Category: Ecu init and shutdown management
 ******************************************************************************************************************
 *  Revision Management                                                                                            
 *  yyyy.mm.dd    name              version      description                                                       
 *  ----------    --------          -------      -----------------------------------                               
-*  2025.12.30    clipping            v0001        Frist edit                                                        
+*  2026.03.23    clipping            v0001        Frist edit                                                        
 ******************************************************************************************************************
 ******************************************************************************************************************/
 
 /* Include Headerfiles  */
-#include "Std_Types.h"
-
-#ifndef _VRM_PUPCTRL_H
-#define _VRM_PUPCTRL_H
-/* Exported Macros Definitions                                          */
 
 
+#ifndef _PMM_HPM_H_
+#define _PMM_HPM_H_
 
-/* Exported Function Definitions                                       */
+/* Include Headerfiles  */
+#include "Platform_Types.h"
+#include "Pmm_Lpm.h"
+/************************************************************************/
+/*                 Global Definitions                                   */
+/************************************************************************/
+extern void _start_CyclicWakeUp(void);
 
-extern void Vrm_SetAndKeepPowerOutput(uint8 PupSt);
-extern void Vrm_SetAndKeepPup1Output(uint8 PupSt);
-extern void Vrm_SetAndKeepPup2Output(uint8 PupSt);
-extern void Vrm_SetAndKeepPup3Output(uint8 PupSt);
-
-
-extern void Vrm_SetPowerOutput(uint8 PupSt);
-extern void Vrm_SetPup1Output(uint8 PupSt);
-extern void Vrm_SetPup2Output(uint8 PupSt);
-extern void Vrm_SetPup3Output(uint8 PupSt);
-
-
-extern void Vrm_ReleasePowerOutput(void);
-extern void Vrm_ReleasePup1Output(void);
-extern void Vrm_ReleasePup2Output(void);
-extern void Vrm_ReleasePup3Output(void);
+/************************************************************************/
+/*                 Global Definitions                                   */
+/************************************************************************/
+extern void Pmm_Hpm_Init(void);
+extern Pmm_Lpm_WakeResourceType_e Pmm_Hpm_GetWakeupEvents(uint8 u8Index);
+extern void Pmm_Hpm_CheckModeTransition(void);
+extern void Pmm_Hpm_PreEnterSleep(void);
+extern void Pmm_Hpm_PreEnterReset(void);
 
 
 #endif
-

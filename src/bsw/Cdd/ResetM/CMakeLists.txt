@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(Vrm_MODULE VERSION 1.0.0)
+project(ResetM VERSION 1.0.0)
 
 set(SOURCES )
 
@@ -12,7 +12,6 @@ add_library(${PROJECT_NAME} STATIC ${SOURCES})
 target_include_directories(${PROJECT_NAME}
     PUBLIC 
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/Vrm_Cfg
 )
 
 # Link with required libraries

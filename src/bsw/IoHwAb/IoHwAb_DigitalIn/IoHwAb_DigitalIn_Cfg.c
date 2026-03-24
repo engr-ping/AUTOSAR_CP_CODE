@@ -25,7 +25,7 @@
 
 /* Exported Variables Definitions */
 /* ============================================================         */
-#define  SAC_START_PROTECTED_RAM
+#define  LPM_START_PROTECTED_RAM
 #include "MemMap.h"
 
 /* Digital input signal debounce buffers */
@@ -37,7 +37,7 @@ boolean IoHwAb_DigitalIn_diDiagIntSt[IOHWAB_DI_CHN_MAX];
 boolean IoHwAb_DigitalIn_diDiagIntEn[IOHWAB_DI_CHN_MAX];
 boolean IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_WD_MAX];
 
-#define  SAC_STOP_PROTECTED_RAM
+#define  LPM_STOP_PROTECTED_RAM
 #include "MemMap.h"
 
 /* Digital Input Channel Configuration */
@@ -53,7 +53,7 @@ IoHwAb_DigitalIn_WakeUpConfig_t IoHwAb_DigitalIn_WakeUpSignal[IOHWAB_DI_WD_MAX] 
     {DIO_CHN_IDL09, &IoHwAb_Di_SignalWakeUpSaved[DIO_CHN_IDL09]},
 };
 
-#define SAC_START_SEC_CODE_RAM
+#define LPM_START_SEC_CODE_RAM
 #include "MemMap.h"
 
 /****************************************************************
@@ -116,7 +116,7 @@ void IoHwAb_DigitalIn_WakeUpConfirm(void)
     }
 }
 
-#define SAC_STOP_SEC_CODE_RAM
+#define LPM_STOP_SEC_CODE_RAM
 #include "MemMap.h"
 
 

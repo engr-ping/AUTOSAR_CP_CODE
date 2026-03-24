@@ -14,24 +14,15 @@
 ******************************************************************************************************************
 ******************************************************************************************************************/
 /* Include Headerfiles  */
-#include "PwmIf_Cfg.h"
+#include "HbIf_Cfg.h"
 
 
-extern void Pwm_SetDutyCycle(uint16 ChannelId, uint16 DutyCycle);
-extern void Pwm_GetDutyPeriodValue(uint16 ChannelId, uint16* Duty, uint16* Period);
 
-const PwmIf_SetDutyCycleCfgType gPwmIf_atSetDutyCycleCfg[PWMIF_PWMO_CHANNEL_MAX] =
+const HbIf_ChannelConfigType HbIf_ChannelConfig[HB_CHANNEL_MAX] =
 {
-    {Pwm_SetDutyCycle, 0},
-    {Pwm_SetDutyCycle, 1},
-    {Pwm_SetDutyCycle, 2},
+    {NULL, 0},
+    {NULL, 1},
+    {NULL, 2},
 
 };
 
-const PwmIf_GetDutyPeriodValueCfgType gPwmIf_atGetDutyPeriodValueCfg[PWMIF_PWMI_CHANNEL_MAX] =
-{
-    {Pwm_GetDutyPeriodValue, 0},
-    {Pwm_GetDutyPeriodValue, 1},
-    {Pwm_GetDutyPeriodValue, 2},
-
-};

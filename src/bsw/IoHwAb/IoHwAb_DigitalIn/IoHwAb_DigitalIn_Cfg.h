@@ -86,7 +86,7 @@ typedef enum
 
 /* Exported Variables Definitions                                       */
 /* ===========================                                          */
-#define  SAC_START_PROTECTED_RAM
+#define  LPM_START_PROTECTED_RAM
 #include "MemMap.h"
 
 
@@ -99,7 +99,7 @@ extern boolean gIoHwAb_abDiDiagIntSt[IOHWAB_DI_CHN_MAX];
 extern boolean gIoHwAb_abDiDiagIntEn[IOHWAB_DI_CHN_MAX];
 extern boolean IoHwAb_Di_SignalWakeUpSaved[IOHWAB_DI_WD_MAX];
 
-#define  SAC_STOP_PROTECTED_RAM
+#define  LPM_STOP_PROTECTED_RAM
 #include "MemMap.h"
 
 /* Channel Configuration */

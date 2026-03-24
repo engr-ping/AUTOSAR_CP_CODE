@@ -3,27 +3,45 @@
 *  Copyright (C) .                                                                            
 *  All rights reserved.                                                                                           
 ******************************************************************************************************************
-*  FileName: Tle9210x                                                                                             
-*  Content:  Tle9210x family drive
-*  Category: Tle92104 Tle92108
+*  FileName: PwmIf                                                                                             
+*  Content:   PwmIf module                                                                                             
+*  Category: PwmIf
 ******************************************************************************************************************
 *  Revision Management                                                                                            
 *  yyyy.mm.dd    name              version      description                                                       
 *  ----------    --------          -------      -----------------------------------                               
-*  2022.03.30    clipping            v0001        Frist edit                                                        
+*  2026.03.09    clipping            v0001        Frist edit                                                        
 ******************************************************************************************************************
 ******************************************************************************************************************/
 /* Include Headerfiles  */
-#ifndef _TLE9210X_H_
-#define _TLE9210X_H_
-#include "Tle9210x_HwCfg.h"
-#include "Tle9210x_Types.h"
+
+#ifndef _HBIF_TYPES_H_
+#define _HBIF_TYPES_H_
+#include "Std_Types.h"
 
 
-extern void Tle9210x_Init(void);
-extern void Tle9210x_MainFunction(void);
-extern void Tle9210x_DeInit(void);
-extern Std_ReturnType Tle9210x_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle);
-extern Std_ReturnType Tle9210x_WriteHbChannel(uint8 ChannelId, uint8 Value);
+#define HBIF_DIR_HIGH  2u   
+#define HBIF_DIR_LOW   1u   
+#define HBIF_DIR_STOP  0u   
 
-#endif
+
+
+/* 半桥类型枚举 */
+typedef enum {
+    HBIF_TYPE_HALF_BRIDGE = 0,     
+    HBIF_TYPE_H_BRIDGE_DIR = 1,    
+    HBIF_TYPE_H_BRIDGE_DUAL = 2     
+} HbIf_BridgeType;
+
+
+typedef Std_ReturnType (*SetFuncType)(uint16,uint16);
+
+typedef struct {       
+    SetFuncType HbFunction;  
+    uint16 channelId;
+
+} HbIf_ChannelConfigType;
+
+
+
+#endif /* _HBIF_TYPES_H_ */

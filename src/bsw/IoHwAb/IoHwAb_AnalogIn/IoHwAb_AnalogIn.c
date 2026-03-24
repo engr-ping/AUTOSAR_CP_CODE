@@ -167,7 +167,7 @@ void IoHwAb_AnalogIn_EnterSleep(void)
     }
 }
 
-#define SAC_START_SEC_CODE_RAM
+#define LPM_START_SEC_CODE_RAM
 #include "MemMap.h"
 
 
@@ -221,5 +221,5 @@ void IoHwAb_AnalogIn_WakeUpConfirm(void)
     }
 
 }
-#define SAC_STOP_SEC_CODE_RAM
+#define LPM_STOP_SEC_CODE_RAM
 #include "MemMap.h"

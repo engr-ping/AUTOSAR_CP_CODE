@@ -211,7 +211,7 @@ void IoHwAb_DigitalIn_ClearChannelDiagInt(uint8 channelId)
     }
 }
 
-#define SAC_START_SEC_CODE_RAM
+#define LPM_START_SEC_CODE_RAM
 #include "MemMap.h"
 
 /****************************************************************
@@ -247,5 +247,5 @@ void IoHwAb_DigitalIn_SignalConfirmProcess(boolean input, uint8 debounceTime, ui
     }
 }
 
-#define SAC_STOP_SEC_CODE_RAM
+#define LPM_STOP_SEC_CODE_RAM
 #include "MemMap.h"

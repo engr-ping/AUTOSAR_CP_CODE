@@ -3,27 +3,35 @@
 *  Copyright (C) .                                                                            
 *  All rights reserved.                                                                                           
 ******************************************************************************************************************
-*  FileName: Tle9210x                                                                                             
-*  Content:  Tle9210x family drive
-*  Category: Tle92104 Tle92108
+*  FileName: PwmIf                                                                                             
+*  Content:   PwmIf module                                                                                             
+*  Category: PwmIf
 ******************************************************************************************************************
 *  Revision Management                                                                                            
 *  yyyy.mm.dd    name              version      description                                                       
 *  ----------    --------          -------      -----------------------------------                               
-*  2022.03.30    clipping            v0001        Frist edit                                                        
+*  2026.03.09    clipping            v0001        Frist edit                                                        
 ******************************************************************************************************************
 ******************************************************************************************************************/
 /* Include Headerfiles  */
-#ifndef _TLE9210X_H_
-#define _TLE9210X_H_
-#include "Tle9210x_HwCfg.h"
-#include "Tle9210x_Types.h"
+#include "HbIf_Cfg.h"
 
 
-extern void Tle9210x_Init(void);
-extern void Tle9210x_MainFunction(void);
-extern void Tle9210x_DeInit(void);
-extern Std_ReturnType Tle9210x_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle);
-extern Std_ReturnType Tle9210x_WriteHbChannel(uint8 ChannelId, uint8 Value);
+extern void Pwm_SetDutyCycle(uint16 ChannelId, uint16 DutyCycle);
+extern void Pwm_GetDutyPeriodValue(uint16 ChannelId, uint16* Duty, uint16* Period);
 
-#endif
+const PwmIf_SetDutyCycleCfgType gPwmIf_atSetDutyCycleCfg[PWMIF_PWMO_CHANNEL_MAX] =
+{
+    {Pwm_SetDutyCycle, 0},
+    {Pwm_SetDutyCycle, 1},
+    {Pwm_SetDutyCycle, 2},
+
+};
+
+const PwmIf_GetDutyPeriodValueCfgType gPwmIf_atGetDutyPeriodValueCfg[PWMIF_PWMI_CHANNEL_MAX] =
+{
+    {Pwm_GetDutyPeriodValue, 0},
+    {Pwm_GetDutyPeriodValue, 1},
+    {Pwm_GetDutyPeriodValue, 2},
+
+};

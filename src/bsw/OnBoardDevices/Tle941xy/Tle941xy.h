@@ -24,7 +24,7 @@ extern void Tle941xy_Init(void);
 extern void Tle941xy_MainFunction(void);
 extern void Tle941xy_DeInit(void);
 extern Std_ReturnType Tle941xy_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle);
-extern Std_ReturnType Tle941xy_WriteOHbChannel(uint8 ChannelId, uint8 Value);
+extern Std_ReturnType Tle941xy_WriteHbChannel(uint8 ChannelId, uint8 Value);
 
 
 #endif

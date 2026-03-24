@@ -645,7 +645,7 @@ void Tle941xy_DeInit(void)
 }
 
 /****************************************************************************************
-| NAME:    Tle941xy_WriteOhbChn
+| NAME:    Tle941xy_WriteHbChn
 | CALLED BY:     output layer
 | PRECONDITIONS:     NA
 | INPUT PARAMETERS:    uint8 channel, uint16 Value
@@ -690,7 +690,7 @@ Std_ReturnType Tle941xy_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle)
     return l_u8RetVal;
 }
 
-Std_ReturnType Tle941xy_WriteOHbChannel(uint8 ChannelId, uint8 Value)
+Std_ReturnType Tle941xy_WriteHbChannel(uint8 ChannelId, uint8 Value)
 {
     Std_ReturnType l_u8RetVal = E_OK;
 

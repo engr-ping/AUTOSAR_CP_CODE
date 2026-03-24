@@ -733,7 +733,7 @@ Std_ReturnType Tle9210x_SetPwmDutyCycle(uint8 ChannelId, uint8 DutyCycle)
     return l_u8RetVal;
 }
 
-Std_ReturnType Tle9210x_WriteOHbChannel(uint8 ChannelId, uint8 Value)
+Std_ReturnType Tle9210x_WriteHbChannel(uint8 ChannelId, uint8 Value)
 {
     Std_ReturnType l_u8RetVal = E_OK;
 
